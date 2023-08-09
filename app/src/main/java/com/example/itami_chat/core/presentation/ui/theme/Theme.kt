@@ -1,71 +1,96 @@
 package com.example.itami_chat.core.presentation.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.platform.LocalView
-import androidx.core.view.WindowCompat
+import com.example.itami_chat.core.domain.model.Theme
 
-private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80
+private val DefaultDarkColorScheme = darkColorScheme(
+    primary = PurpleBlue80,
+    onPrimary = White90,
+    surface = Black10,
+    onSurface = White85,
+    surfaceVariant = Black10,
+    onSurfaceVariant = White80,
+    inverseSurface = Black5,
+    inverseOnSurface = White80,
+    surfaceTint = Black11,
+    outlineVariant = Black10,
+    background = Black5,
+    onBackground = White80
 )
 
-private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40
-
-    /* Other default colors to override
-    background = Color(0xFFFFFBFE),
-    surface = Color(0xFFFFFBFE),
-    onPrimary = Color.White,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
-    onBackground = Color(0xFF1C1B1F),
-    onSurface = Color(0xFF1C1B1F),
-    */
+private val DefaultLightColorScheme = lightColorScheme(
+    primary = PurpleBlue90,
+    onPrimary = White90,
+    surface = WhitePurplyBlue,
+    onSurface = Black100,
+    surfaceVariant = WhitePurplyBlue,
+    onSurfaceVariant = Black100,
+    inverseSurface = White100,
+    inverseOnSurface = Black100,
+    surfaceTint = White85,
+    outlineVariant = White75,
+    background = White100,
+    onBackground = Black100
 )
+
+private val BlueDarkColorScheme = lightColorScheme(
+    primary = PurpleBlue65,
+    onPrimary = White90,
+    surface = DarkPurplyBlue20,
+    onSurface = White80,
+    surfaceVariant = DarkPurplyBlue20,
+    onSurfaceVariant = White80,
+    inverseSurface = DarkPurplyBlue10,
+    inverseOnSurface = White75,
+    surfaceTint = BlackPurplyBlue,
+    outlineVariant = BlackBlue,
+    background = DarkPurplyBlue10,
+    onBackground = White80
+)
+
+private val BlueLightColorScheme = lightColorScheme(
+    primary = Blue70,
+    onPrimary = White100,
+    surface = Blue60,
+    onSurface = White90,
+    surfaceVariant = White85,
+    onSurfaceVariant = Black100,
+    inverseSurface = White100,
+    inverseOnSurface = Black100,
+    surfaceTint = White85,
+    outlineVariant = White75,
+    background = White100,
+    onBackground = Black100
+)
+
 
 @Composable
-fun Itami_ChatTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    // Dynamic color is available on Android 12+
-    someVar: Boolean = false,
-    dynamicColor: Boolean = true,
-    content: @Composable () -> Unit
+fun ItamiChatTheme(
+    theme: Theme = Theme.Default,
+    isDarkMode: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
-    }
-    val view = LocalView.current
-    if (!view.isInEditMode) {
-        SideEffect {
-            val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+    val colorScheme = if (isDarkMode) {
+        when (theme) {
+            Theme.Default -> DefaultDarkColorScheme
+            Theme.Blue -> BlueDarkColorScheme
+        }
+    } else {
+        when (theme) {
+            Theme.Default -> DefaultLightColorScheme
+            Theme.Blue -> BlueLightColorScheme
         }
     }
 
     MaterialTheme(
         colorScheme = colorScheme,
         typography = Typography,
-        content = content
+        shapes = Shapes,
+        content = content,
     )
 }
