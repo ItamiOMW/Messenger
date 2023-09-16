@@ -17,6 +17,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.example.itami_chat.R
 
@@ -24,6 +25,7 @@ import com.example.itami_chat.R
 @Composable
 fun ImagePickerComponent(
     imageUri: () -> Uri?,
+    imageLoader: ImageLoader,
     onAddImageButtonClicked: () -> Unit,
     modifier: Modifier = Modifier,
     iconSize: Dp = 24.dp,
@@ -44,6 +46,7 @@ fun ImagePickerComponent(
                 .size(imageSize)
                 .clip(imageShape),
             model = imageUri(),
+            imageLoader = imageLoader,
             contentDescription = stringResource(R.string.desc_chosen_image),
             placeholder = painterResource(id = R.drawable.sniper_mask),
             fallback = painterResource(id = R.drawable.sniper_mask),

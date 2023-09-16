@@ -1,12 +1,15 @@
 package com.example.itami_chat.authentication_feature.presentation
 
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.navigation
 import androidx.navigation.navArgument
+import coil.ImageLoader
 import com.example.itami_chat.authentication_feature.presentation.create_profile.CreateProfileScreen
 import com.example.itami_chat.authentication_feature.presentation.create_profile.CreateProfileViewModel
 import com.example.itami_chat.authentication_feature.presentation.forgot_password.ForgotPasswordScreen
@@ -25,13 +28,11 @@ import com.example.itami_chat.authentication_feature.presentation.verify_email.V
 import com.example.itami_chat.authentication_feature.presentation.verify_email.VerifyEmailViewModel
 import com.example.itami_chat.core.presentation.navigation.Graph
 import com.example.itami_chat.core.presentation.navigation.Screen
-import com.google.accompanist.navigation.animation.composable
-import com.google.accompanist.navigation.animation.navigation
 
 
-@OptIn(ExperimentalAnimationApi::class)
 fun NavGraphBuilder.authGraph(
     navController: NavController,
+    imageLoader: ImageLoader,
     onShowSnackbar: (message: String) -> Unit,
 ) {
     navigation(
@@ -58,7 +59,6 @@ fun NavGraphBuilder.authGraph(
                             inclusive = true
                         }
                     }
-                    navController.graph.setStartDestination(Graph.CHATS_GRAPH)
                 },
                 onShowSnackbar = onShowSnackbar,
                 uiEvent = viewModel.uiEvent
@@ -100,7 +100,7 @@ fun NavGraphBuilder.authGraph(
                     navController.navigate(
                         Graph.CHATS_GRAPH,
                     ) {
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(Screen.Splash.fullRoute) {
                             inclusive = true
                         }
                     }
@@ -129,7 +129,9 @@ fun NavGraphBuilder.authGraph(
                     }
                 },
                 onNavigateBack = {
-                    navController.popBackStack()
+                    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                        navController.popBackStack()
+                    }
                 },
                 state = viewModel.state,
                 emailFieldState = viewModel.emailState,
@@ -153,7 +155,9 @@ fun NavGraphBuilder.authGraph(
                     }
                 },
                 onNavigateBack = {
-                    navController.popBackStack()
+                    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                        navController.popBackStack()
+                    }
                 },
                 state = viewModel.state,
                 emailFieldState = viewModel.emailState,
@@ -183,7 +187,9 @@ fun NavGraphBuilder.authGraph(
                     }
                 },
                 onNavigateBack = {
-                    navController.popBackStack()
+                    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                        navController.popBackStack()
+                    }
                 },
                 onShowSnackbar = onShowSnackbar,
                 state = viewModel.state,
@@ -198,18 +204,21 @@ fun NavGraphBuilder.authGraph(
                     navController.navigate(
                         Graph.CHATS_GRAPH,
                     ) {
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(Screen.Splash.fullRoute) {
                             inclusive = true
                         }
                     }
                     navController.graph.setStartDestination(Graph.CHATS_GRAPH)
                 },
                 onNavigateBack = {
-                    navController.popBackStack(
-                        route = Screen.Onboarding.fullRoute,
-                        inclusive = false
-                    )
+                    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                        navController.popBackStack(
+                            route = Screen.Onboarding.fullRoute,
+                            inclusive = false
+                        )
+                    }
                 },
+                imageLoader = imageLoader,
                 state = viewModel.state,
                 fullNameState = viewModel.fullNameState,
                 bioState = viewModel.bioState,
@@ -233,7 +242,9 @@ fun NavGraphBuilder.authGraph(
                     }
                 },
                 onNavigateBack = {
-                    navController.popBackStack()
+                    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                        navController.popBackStack()
+                    }
                 },
                 state = viewModel.state,
                 emailState = viewModel.emailState,
@@ -258,7 +269,9 @@ fun NavGraphBuilder.authGraph(
                     navController.popBackStack(route = Screen.Login.fullRoute, inclusive = false)
                 },
                 onNavigateBack = {
-                    navController.popBackStack()
+                    if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                        navController.popBackStack()
+                    }
                 },
                 onShowSnackbar = onShowSnackbar,
                 state = viewModel.state,

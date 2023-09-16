@@ -3,9 +3,8 @@ package com.example.itami_chat.authentication_feature.domain.use_case
 import com.example.itami_chat.authentication_feature.domain.model.ResetPasswordResult
 import com.example.itami_chat.authentication_feature.domain.repository.AuthRepository
 import com.example.itami_chat.core.domain.util.ValidationUtil
-import javax.inject.Inject
 
-class ResetPasswordUseCase @Inject constructor(
+class ResetPasswordUseCase(
     private val authRepository: AuthRepository,
 ) {
 

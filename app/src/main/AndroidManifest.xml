@@ -6,6 +6,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+
     <application
         android:name=".ItamiChatApp"
         android:allowBackup="true"
@@ -20,7 +21,8 @@
         <activity
             android:name=".core.presentation.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Itami_Chat">
+            android:theme="@style/Theme.Itami_Chat"
+            android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

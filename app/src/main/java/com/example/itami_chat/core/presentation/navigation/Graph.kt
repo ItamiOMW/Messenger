@@ -10,4 +10,6 @@ object Graph {
 
     const val SETTINGS_GRAPH = "settings_graph"
 
+    const val CONTACTS_GRAPH = "contacts_graph"
+
 }

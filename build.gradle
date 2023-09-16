@@ -2,7 +2,7 @@
 buildscript {
     ext {
         core_ktx_version = '1.10.0'
-        lifecycle_runtime_ktx_version = '2.6.1'
+        lifecycle_runtime_ktx_version = '2.6.2'
         activity_compose_version = '1.7.1'
         compose_lifecycle_viewmodel_version = '2.6.1'
         compose_material_icons_version = '1.5.0-alpha04'
@@ -10,11 +10,10 @@ buildscript {
         hilt_lifecycle_viewmodel_version = '1.0.0-alpha03'
         hilt_compiler_version = '1.0.0'
         hilt_nav_compose_version = '1.0.0'
-        splash_screen_api_version = '1.0.1'
-        compose_nav_version = '2.6.0'
+        compose_nav_version = '2.7.2'
         retrofit_version = '2.9.0'
+        ktor_version = '2.3.3'
         okhttp_version = '5.0.0-alpha.3'
-        accompanist_animation_version = '0.31.1-alpha'
         accompanist_systemui_controller_version = '0.27.0'
         crypto_version = '1.1.0-alpha06'
         datastore_version = '1.0.0'

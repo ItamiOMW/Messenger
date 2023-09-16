@@ -1,5 +1,6 @@
 package com.example.itami_chat.authentication_feature.presentation.password_reset
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -66,6 +67,10 @@ fun PasswordResetScreen(
                 }
             }
         }
+    }
+
+    BackHandler {
+        onNavigateBack()
     }
 
     Box(modifier = Modifier.fillMaxSize()) {

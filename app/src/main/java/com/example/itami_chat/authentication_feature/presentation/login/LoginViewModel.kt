@@ -36,6 +36,9 @@ class LoginViewModel @Inject constructor(
     var emailState by mutableStateOf(StandardTextFieldState())
         private set
 
+    var isDarkMode by mutableStateOf(false)
+        private set
+
     var passwordState by mutableStateOf(PasswordTextFieldState())
         private set
 

@@ -22,36 +22,30 @@ interface AuthApiService {
         @Body loginCredentials: LoginRequest,
     ): Response<ApiResponse<AuthResponse>>
 
-
     @POST("api/v1/auth/register")
     suspend fun register(
         @Body registerCredentials: RegisterRequest,
     ): Response<ApiResponse<Unit>>
-
 
     @GET("api/v1/auth/authenticate")
     suspend fun authenticate(
         @Header("Authorization") token: String,
     ): Response<ApiResponse<MyUserResponse>>
 
-
     @POST("api/v1/auth/verify-email")
     suspend fun verifyEmail(
         @Body verifyEmailRequest: VerifyEmailRequest,
     ): Response<ApiResponse<AuthResponse>>
-
 
     @POST("api/v1/auth/send-verification-code")
     suspend fun sendEmailVerificationCode(
         @Body sendVerificationCodeRequest: SendVerificationCodeRequest,
     ): Response<ApiResponse<Unit>>
 
-
     @POST("api/v1/auth/send-password-reset-code")
     suspend fun sendPasswordResetCode(
         @Body sendPasswordResetCodeRequest: SendPasswordResetCodeRequest
     ): Response<ApiResponse<Unit>>
-
 
     @POST("api/v1/auth/reset-password")
     suspend fun resetPassword(

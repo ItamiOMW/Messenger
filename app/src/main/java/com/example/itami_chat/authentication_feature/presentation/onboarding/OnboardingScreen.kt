@@ -95,7 +95,12 @@ fun OnboardingScreen(
         )
     }
 
-    val pagerState = rememberPagerState()
+    val pagerState = rememberPagerState(
+        initialPage = 0,
+        initialPageOffsetFraction = 0f
+    ) {
+        onboardingItems.size
+    }
 
     Scaffold {
         Column(
@@ -121,7 +126,7 @@ fun OnboardingScreen(
                 )
             }
             Spacer(modifier = Modifier.height(MaterialTheme.spacing.large))
-            HorizontalPager(state = pagerState, pageCount = onboardingItems.size) { page ->
+            HorizontalPager(state = pagerState) { page ->
                 OnboardingContentComponent(
                     onboardingData = onboardingItems[page],
                     modifier = Modifier.fillMaxWidth()

@@ -5,5 +5,6 @@ data class SimpleUser(
     val fullName: String,
     val username: String?,
     val profilePictureUrl: String?,
+    val isOnline: Boolean,
     val lastActivity: Long,
 )

@@ -16,21 +16,63 @@ sealed class Screen(protected val route: String, vararg params: String) {
 
     data object Register : Screen(REGISTER_SCREEN_ROUTE)
 
-    data object VerifyEmail: Screen(VERIFY_EMAIL_SCREEN_ROUTE, EMAIL_ARG) {
+    data object VerifyEmail : Screen(VERIFY_EMAIL_SCREEN_ROUTE, EMAIL_ARG) {
         fun getRouteWithArgs(email: String) = route.appendParams(EMAIL_ARG to email)
     }
 
-    data object CreateProfile: Screen(CREATE_PROFILE_SCREEN_ROUTE)
+    data object CreateProfile : Screen(CREATE_PROFILE_SCREEN_ROUTE)
 
-    data object ForgotPassword: Screen(FORGOT_PASSWORD_SCREEN_ROUTE)
+    data object ForgotPassword : Screen(FORGOT_PASSWORD_SCREEN_ROUTE)
 
-    data object PasswordReset: Screen(PASSWORD_RESET_SCREEN_ROUTE, EMAIL_ARG) {
+    data object PasswordReset : Screen(PASSWORD_RESET_SCREEN_ROUTE, EMAIL_ARG) {
         fun getRouteWithArgs(email: String) = route.appendParams(EMAIL_ARG to email)
     }
-
-
 
     data object Chats : Screen(CHATS_SCREEN_ROUTE)
+
+    data object DialogChat : Screen(DIALOG_CHAT_SCREEN_ROUTE, USER_ID_ARG) {
+        fun getRouteWithArgs(userId: Int): String {
+            return route.appendParams(USER_ID_ARG to userId)
+        }
+    }
+
+    data object GroupChat : Screen(GROUP_CHAT_SCREEN_ROUTE, CHAT_ID_ARG) {
+        fun getRouteWithArgs(chatId: Int): String {
+            return route.appendParams(CHAT_ID_ARG to chatId)
+        }
+    }
+
+    data object NewMessage : Screen(NEW_MESSAGE_SCREEN_ROUTE)
+
+    data object NewGroupParticipants : Screen(NEW_GROUP_PARTICIPANTS_SCREEN_ROUTE)
+
+    data object NewGroupDetails : Screen(NEW_GROUP_DETAILS_SCREEN_ROUTE, USER_IDS_ARG) {
+        fun getRouteWithArgs(userIds: List<Int>): String {
+            return route.appendParams(USER_IDS_ARG to userIds)
+        }
+    }
+
+    data object ChatProfile : Screen(CHAT_PROFILE_SCREEN_ROUTE, CHAT_ID_ARG) {
+        fun getRouteWithArgs(chatId: Int): String {
+            return route.appendParams(CHAT_ID_ARG to chatId)
+        }
+    }
+
+    data object EditChat : Screen(EDIT_CHAT_SCREEN_ROUTE, CHAT_ID_ARG) {
+        fun getRouteWithArgs(chatId: Int): String {
+            return route.appendParams(CHAT_ID_ARG to chatId)
+        }
+    }
+
+    data object AddChatParticipants : Screen(ADD_CHAT_PARTICIPANTS_SCREEN_ROUTE, CHAT_ID_ARG) {
+        fun getRouteWithArgs(chatId: Int): String {
+            return route.appendParams(CHAT_ID_ARG to chatId)
+        }
+    }
+
+    data object Settings : Screen(SETTINGS_SCREEN_ROUTE)
+
+    data object Contacts : Screen(CONTACTS_SCREEN_ROUTE)
 
 
     companion object {
@@ -47,9 +89,26 @@ sealed class Screen(protected val route: String, vararg params: String) {
 
         //Chats feature
         private const val CHATS_SCREEN_ROUTE = "chats"
+        private const val DIALOG_CHAT_SCREEN_ROUTE = "dialog_chat"
+        private const val GROUP_CHAT_SCREEN_ROUTE = "group_chat"
+        private const val NEW_MESSAGE_SCREEN_ROUTE = "new_message"
+        private const val NEW_GROUP_PARTICIPANTS_SCREEN_ROUTE = "new_group_participants"
+        private const val NEW_GROUP_DETAILS_SCREEN_ROUTE = "new_group_details"
+        private const val CHAT_PROFILE_SCREEN_ROUTE = "chat_profile"
+        private const val EDIT_CHAT_SCREEN_ROUTE = "edit_profile"
+        private const val ADD_CHAT_PARTICIPANTS_SCREEN_ROUTE = "add_chat_participants"
 
-        const val MESSAGE_ARG = "message_arg"
+        //Settings feature
+        private const val SETTINGS_SCREEN_ROUTE = "settings"
+
+        //Contacts feature
+        private const val CONTACTS_SCREEN_ROUTE = "contacts"
+
+        //Arguments
         const val EMAIL_ARG = "email_arg"
+        const val USER_ID_ARG = "user_arg"
+        const val CHAT_ID_ARG = "user_arg"
+        const val USER_IDS_ARG = "user_ids_arg"
 
     }
 
