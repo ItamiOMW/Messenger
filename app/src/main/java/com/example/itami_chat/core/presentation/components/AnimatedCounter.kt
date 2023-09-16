@@ -3,14 +3,14 @@ package com.example.itami_chat.core.presentation.components
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -22,10 +22,10 @@ fun AnimatedCounter(
     count: Int,
     modifier: Modifier = Modifier,
     style: TextStyle = MaterialTheme.typography.bodyLarge,
-    color: Color = MaterialTheme.colorScheme.onBackground.copy(0.6f)
+    color: Color = MaterialTheme.colorScheme.onBackground.copy(0.6f),
 ) {
     var oldCount by remember {
-        mutableStateOf(count)
+        mutableIntStateOf(count)
     }
     SideEffect {
         oldCount = count
@@ -33,10 +33,10 @@ fun AnimatedCounter(
     Row(modifier = modifier) {
         val countString = count.toString()
         val oldCountString = oldCount.toString()
-        for(i in countString.indices) {
+        for (i in countString.indices) {
             val oldChar = oldCountString.getOrNull(i)
             val newChar = countString[i]
-            val char = if(oldChar == newChar) {
+            val char = if (oldChar == newChar) {
                 oldCountString[i]
             } else {
                 countString[i]
@@ -44,7 +44,7 @@ fun AnimatedCounter(
             AnimatedContent(
                 targetState = char,
                 transitionSpec = {
-                    slideInVertically { it } with slideOutVertically { -it }
+                    slideInVertically { it } togetherWith slideOutVertically { -it }
                 },
                 label = "What is this?"
             ) { char ->

@@ -1,12 +1,11 @@
 package com.example.itami_chat.core.domain.usecase
 
-import com.example.itami_chat.core.domain.model.UpdateProfileData
 import com.example.itami_chat.core.domain.model.ProfileValidationResult
+import com.example.itami_chat.core.domain.model.UpdateProfileData
 import com.example.itami_chat.core.domain.repository.UserRepository
 import com.example.itami_chat.core.domain.util.ValidationUtil
-import javax.inject.Inject
 
-class UpdateProfileUseCase @Inject constructor(
+class UpdateProfileUseCase(
     private val userRepository: UserRepository,
 ) {
 

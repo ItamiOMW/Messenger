@@ -3,6 +3,7 @@ package com.example.itami_chat.core.data.remote.service
 import com.example.itami_chat.authentication_feature.data.remote.dto.response.MyUserResponse
 import com.example.itami_chat.core.data.remote.dto.response.ApiResponse
 import com.example.itami_chat.core.data.remote.dto.response.ProfileResponse
+import com.example.itami_chat.core.data.remote.dto.response.SimpleUserResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
 import retrofit2.http.GET
@@ -12,6 +13,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface UserApiService {
 
@@ -24,20 +26,23 @@ interface UserApiService {
         @Part profilePicture: MultipartBody.Part?,
     ): Response<ApiResponse<MyUserResponse>>
 
-
     @GET("api/v1/users/profile/{id}")
     suspend fun getProfile(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
     ): Response<ApiResponse<ProfileResponse>>
 
+    @GET("api/v1/users")
+    suspend fun getUsersByIds(
+        @Header("Authorization") token: String,
+        @Query("ids") userIds: List<Int>,
+    ): Response<ApiResponse<List<SimpleUserResponse>>>
 
     @POST("api/v1/users/block/{id}")
     suspend fun blockUser(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
     ): Response<ApiResponse<Unit>>
-
 
     @POST("api/v1/users/unblock/{id}")
     suspend fun unblockUser(

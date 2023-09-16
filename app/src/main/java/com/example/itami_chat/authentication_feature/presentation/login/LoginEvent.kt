@@ -6,8 +6,8 @@ sealed class LoginEvent {
 
     data class OnPasswordInputChange(val newValue: String): LoginEvent()
 
-    object OnChangePasswordVisibility: LoginEvent()
+    data object OnChangePasswordVisibility: LoginEvent()
 
-    object OnLogin: LoginEvent()
+    data object OnLogin: LoginEvent()
 
 }

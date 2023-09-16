@@ -16,6 +16,7 @@ class MainViewModel @Inject constructor(
     private val appSettingsManager: AppSettingsManager
 ) : ViewModel() {
 
+
     var theme by mutableStateOf(Theme.Default)
         private set
 

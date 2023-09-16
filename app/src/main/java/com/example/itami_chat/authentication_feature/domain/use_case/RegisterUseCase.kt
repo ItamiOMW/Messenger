@@ -3,9 +3,8 @@ package com.example.itami_chat.authentication_feature.domain.use_case
 import com.example.itami_chat.authentication_feature.domain.model.RegisterResult
 import com.example.itami_chat.authentication_feature.domain.repository.AuthRepository
 import com.example.itami_chat.core.domain.util.ValidationUtil
-import javax.inject.Inject
 
-class RegisterUseCase @Inject constructor(
+class RegisterUseCase(
     private val authRepository: AuthRepository,
 ) {
 

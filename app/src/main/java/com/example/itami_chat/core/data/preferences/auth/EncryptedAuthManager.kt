@@ -22,13 +22,13 @@ class EncryptedAuthManager @Inject constructor(
         EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM,
     )
 
-    override val authToken: String?
-        get() = sharedPreferences.getString(AUTH_TOKEN_KEY, null)
+    override val token: String?
+        get() = sharedPreferences.getString(ACCESS_TOKEN_KEY, null)
 
 
     override fun setToken(token: String?) {
         sharedPreferences.edit()
-            .putString(AUTH_TOKEN_KEY, token)
+            .putString(ACCESS_TOKEN_KEY, token)
             .apply()
     }
 
@@ -37,7 +37,7 @@ class EncryptedAuthManager @Inject constructor(
 
         private const val TOKEN_STORAGE_FILE_NAME = "token_storage"
 
-        private const val AUTH_TOKEN_KEY = "auth_token_key"
+        private const val ACCESS_TOKEN_KEY = "access_token_key"
     }
 
 

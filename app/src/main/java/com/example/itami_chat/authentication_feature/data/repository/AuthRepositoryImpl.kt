@@ -10,9 +10,9 @@ import com.example.itami_chat.authentication_feature.data.remote.dto.request.Sen
 import com.example.itami_chat.authentication_feature.data.remote.dto.request.SendVerificationCodeRequest
 import com.example.itami_chat.authentication_feature.data.remote.dto.request.VerifyEmailRequest
 import com.example.itami_chat.authentication_feature.domain.repository.AuthRepository
-import com.example.itami_chat.core.data.mapper.toDataStoreUser
+import com.example.itami_chat.core.data.mapper.toMyUser
 import com.example.itami_chat.core.data.preferences.auth.AuthManager
-import com.example.itami_chat.core.data.preferences.user.UserManager
+import com.example.itami_chat.core.domain.preferences.UserManager
 import com.example.itami_chat.core.data.remote.dto.response.FailedApiResponse
 import com.example.itami_chat.core.domain.exception.PoorNetworkConnectionException
 import com.example.itami_chat.core.domain.exception.UnauthorizedException
@@ -32,14 +32,11 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun login(email: String, password: String): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
             val response = authApiService.login(LoginRequest(email, password))
-
             if (response.isSuccessful) {
                 val token = response.body()?.data?.token
                     ?: return AppResponse.failed(UnauthorizedException, "Backend eblan.")
@@ -48,14 +45,13 @@ class AuthRepositoryImpl @Inject constructor(
                     ?: return AppResponse.failed(UnauthorizedException, "Backend eblan.")
 
                 authManager.setToken(token)
-                userManager.setUser(user.toDataStoreUser())
+                userManager.setUser(user.toMyUser())
                 return AppResponse.success(Unit)
             }
 
             val failedApiResponse = gson.fromJson(
                 response.errorBody()?.charStream(), FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(
@@ -73,14 +69,11 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun register(email: String, password: String): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
             val response = authApiService.register(RegisterRequest(email, password))
-
             if (response.isSuccessful) {
                 return AppResponse.success(Unit)
             }
@@ -88,7 +81,6 @@ class AuthRepositoryImpl @Inject constructor(
             val failedApiResponse = gson.fromJson(
                 response.errorBody()?.charStream(), FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(
@@ -105,26 +97,21 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun authenticate(): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
-            val token = authManager.authToken ?: return AppResponse.failed(UnauthorizedException)
-
+            val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
             val response = authApiService.authenticate("Bearer $token")
-
             if (response.isSuccessful) {
                 val user = response.body()?.data ?: return AppResponse.failed(UnauthorizedException)
-                userManager.setUser(user.toDataStoreUser())
+                userManager.setUser(user.toMyUser())
                 return AppResponse.success(Unit)
             }
 
             val failedApiResponse = gson.fromJson(
                 response.errorBody()?.charStream(), FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(
@@ -141,14 +128,11 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun verifyEmail(email: String, code: Int): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
             val response = authApiService.verifyEmail(VerifyEmailRequest(email, code))
-
             if (response.isSuccessful) {
                 val token = response.body()?.data?.token
                     ?: return AppResponse.failed(UnauthorizedException, "Backend eblan.")
@@ -157,14 +141,13 @@ class AuthRepositoryImpl @Inject constructor(
                     ?: return AppResponse.failed(UnauthorizedException, "Backend eblan.")
 
                 authManager.setToken(token)
-                userManager.setUser(user.toDataStoreUser())
+                userManager.setUser(user.toMyUser())
                 return AppResponse.success(Unit)
             }
 
             val failedApiResponse = gson.fromJson(
                 response.errorBody()?.charStream(), FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(
@@ -181,23 +164,21 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun resendEmailVerificationCode(email: String): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
-            val response =
-                authApiService.sendEmailVerificationCode(SendVerificationCodeRequest(email))
-
+            val response = authApiService.sendEmailVerificationCode(
+                SendVerificationCodeRequest(email)
+            )
             if (response.isSuccessful) {
                 return AppResponse.success(Unit)
             }
 
             val failedApiResponse = gson.fromJson(
-                response.errorBody()?.charStream(), FailedApiResponse::class.java
+                response.errorBody()?.charStream(),
+                FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(
@@ -214,22 +195,19 @@ class AuthRepositoryImpl @Inject constructor(
 
     override suspend fun sendPasswordResetCode(email: String): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
             val response = authApiService.sendPasswordResetCode(SendPasswordResetCodeRequest(email))
-
             if (response.isSuccessful) {
                 return AppResponse.success(Unit)
             }
 
             val failedApiResponse = gson.fromJson(
-                response.errorBody()?.charStream(), FailedApiResponse::class.java
+                response.errorBody()?.charStream(),
+                FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(
@@ -250,24 +228,21 @@ class AuthRepositoryImpl @Inject constructor(
         newPassword: String,
     ): AppResponse<Unit> {
         return try {
-            val isNetworkAvailable = NetworkUtil.isNetworkAvailable(application)
-
-            if (!isNetworkAvailable) {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
                 return AppResponse.failed(PoorNetworkConnectionException)
             }
 
             val response = authApiService.resetPassword(
                 PasswordResetRequest(email, code, newPassword)
             )
-
             if (response.isSuccessful) {
                 return AppResponse.success(Unit)
             }
 
             val failedApiResponse = gson.fromJson(
-                response.errorBody()?.charStream(), FailedApiResponse::class.java
+                response.errorBody()?.charStream(),
+                FailedApiResponse::class.java
             )
-
             val exception = failedApiResponse.toException()
 
             return AppResponse.failed(

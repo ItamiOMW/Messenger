@@ -3,10 +3,9 @@ package com.example.itami_chat.authentication_feature.domain.use_case
 import com.example.itami_chat.authentication_feature.domain.repository.AuthRepository
 import com.example.itami_chat.core.domain.model.AppResponse
 import com.example.itami_chat.core.domain.util.ValidationUtil
-import javax.inject.Inject
 
-class VerifyEmailUseCase @Inject constructor(
-    private val authRepository: AuthRepository
+class VerifyEmailUseCase(
+    private val authRepository: AuthRepository,
 ) {
 
     suspend operator fun invoke(email: String, code: Int): AppResponse<Unit> {

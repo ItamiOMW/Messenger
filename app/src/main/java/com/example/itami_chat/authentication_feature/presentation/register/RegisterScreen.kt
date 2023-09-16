@@ -1,5 +1,6 @@
 package com.example.itami_chat.authentication_feature.presentation.register
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -58,6 +59,10 @@ fun RegisterScreen(
                 is RegisterUiEvent.OnNavigateToVerifyEmail -> onNavigateToVerifyEmail(event.email)
             }
         }
+    }
+
+    BackHandler {
+        onNavigateBack()
     }
 
     Box(modifier = Modifier.fillMaxSize()) {
