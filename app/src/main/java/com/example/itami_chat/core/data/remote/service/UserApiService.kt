@@ -2,7 +2,7 @@ package com.example.itami_chat.core.data.remote.service
 
 import com.example.itami_chat.authentication_feature.data.remote.dto.response.MyUserResponse
 import com.example.itami_chat.core.data.remote.dto.response.ApiResponse
-import com.example.itami_chat.core.data.remote.dto.response.ProfileResponse
+import com.example.itami_chat.core.data.remote.dto.response.UserProfileResponse
 import com.example.itami_chat.core.data.remote.dto.response.SimpleUserResponse
 import okhttp3.MultipartBody
 import retrofit2.Response
@@ -30,7 +30,7 @@ interface UserApiService {
     suspend fun getProfile(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
-    ): Response<ApiResponse<ProfileResponse>>
+    ): Response<ApiResponse<UserProfileResponse>>
 
     @GET("api/v1/users")
     suspend fun getUsersByIds(
@@ -38,13 +38,19 @@ interface UserApiService {
         @Query("ids") userIds: List<Int>,
     ): Response<ApiResponse<List<SimpleUserResponse>>>
 
-    @POST("api/v1/users/block/{id}")
+    @GET("api/v1/users/search")
+    suspend fun searchForUsers(
+        @Header("Authorization") token: String,
+        @Query("query") query: String,
+    ): Response<ApiResponse<List<SimpleUserResponse>>>
+
+    @POST("api/v1/users/{id}/block")
     suspend fun blockUser(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
     ): Response<ApiResponse<Unit>>
 
-    @POST("api/v1/users/unblock/{id}")
+    @POST("api/v1/users/{id}/unblock")
     suspend fun unblockUser(
         @Header("Authorization") token: String,
         @Path("id") id: Int,

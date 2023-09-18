@@ -70,8 +70,8 @@ fun NavigationDrawerComponent(
                 imageLoader = imageLoader,
                 error = painterResource(id = R.drawable.sniper_mask),
                 modifier = Modifier
-                    .size(70.dp, 70.dp)
-                    .clip(RoundedCornerShape(45.dp)),
+                    .size(60.dp)
+                    .clip(RoundedCornerShape(30.dp)),
             )
             Column(
                 verticalArrangement = Arrangement.spacedBy(1.dp)

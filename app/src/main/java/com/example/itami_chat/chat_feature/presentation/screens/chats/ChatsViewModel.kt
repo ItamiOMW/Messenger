@@ -91,6 +91,14 @@ class ChatsViewModel @Inject constructor(
                             state.copy(chats = chats.sortedByDescending { it.lastMessage?.createdAt })
                     }
 
+                    is ChatEvent.Error -> {
+                        sendUiEvent(
+                            ChatsUiEvent.OnShowSnackbar(
+                                chatEvent.message
+                            )
+                        )
+                    }
+
                     else -> println("Unexpected chat event.")
                 }
             }
@@ -116,6 +124,12 @@ class ChatsViewModel @Inject constructor(
             userManager.user.collect { myUser ->
                 state = state.copy(myUser = myUser)
             }
+        }
+    }
+
+    private fun sendUiEvent(event: ChatsUiEvent) {
+        viewModelScope.launch {
+            sendUiEvent(event)
         }
     }
 

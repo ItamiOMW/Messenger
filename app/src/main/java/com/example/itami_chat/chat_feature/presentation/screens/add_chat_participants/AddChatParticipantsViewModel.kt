@@ -15,7 +15,7 @@ import com.example.itami_chat.core.domain.model.AppResponse
 import com.example.itami_chat.core.domain.model.MyUser
 import com.example.itami_chat.core.domain.model.SimpleUser
 import com.example.itami_chat.core.domain.preferences.UserManager
-import com.example.itami_chat.core.domain.usecase.GetContactsUseCase
+import com.example.itami_chat.core.domain.use_case.GetContactsUseCase
 import com.example.itami_chat.core.presentation.navigation.Screen
 import com.example.itami_chat.core.utils.Constants
 import dagger.hilt.android.lifecycle.HiltViewModel

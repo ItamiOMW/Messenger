@@ -15,9 +15,17 @@ import com.example.itami_chat.core.data.repository.UserRepositoryImpl
 import com.example.itami_chat.core.domain.preferences.AppSettingsManager
 import com.example.itami_chat.core.domain.repository.ContactsRepository
 import com.example.itami_chat.core.domain.repository.UserRepository
-import com.example.itami_chat.core.domain.usecase.GetContactsUseCase
-import com.example.itami_chat.core.domain.usecase.GetUsersByIdsUseCase
-import com.example.itami_chat.core.domain.usecase.UpdateProfileUseCase
+import com.example.itami_chat.core.domain.use_case.AcceptContactRequestUseCase
+import com.example.itami_chat.core.domain.use_case.BlockUserUseCase
+import com.example.itami_chat.core.domain.use_case.CancelContactRequestUseCase
+import com.example.itami_chat.core.domain.use_case.DeclineContactRequestUseCase
+import com.example.itami_chat.core.domain.use_case.DeleteContactUseCase
+import com.example.itami_chat.core.domain.use_case.GetContactsUseCase
+import com.example.itami_chat.core.domain.use_case.GetUsersByIdsUseCase
+import com.example.itami_chat.core.domain.use_case.SearchForUsersUseCase
+import com.example.itami_chat.core.domain.use_case.SendContactRequestUseCase
+import com.example.itami_chat.core.domain.use_case.UnblockUserUseCase
+import com.example.itami_chat.core.domain.use_case.UpdateProfileUseCase
 import com.google.gson.Gson
 import dagger.Module
 import dagger.Provides
@@ -39,23 +47,70 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    @Provides
+    @Singleton
+    fun provideSearchForUsersUseCase(
+        userRepository: UserRepository,
+    ) = SearchForUsersUseCase(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeleteContactUseCase(
+        contactsRepository: ContactsRepository,
+    ) = DeleteContactUseCase(contactsRepository)
+
+    @Provides
+    @Singleton
+    fun provideSendContactRequestUseCase(
+        contactsRepository: ContactsRepository,
+    ) = SendContactRequestUseCase(contactsRepository)
+
+    @Provides
+    @Singleton
+    fun provideCancelContactRequestUseCase(
+        contactsRepository: ContactsRepository,
+    ) = CancelContactRequestUseCase(contactsRepository)
+
+    @Provides
+    @Singleton
+    fun provideAcceptContactRequestUseCase(
+        contactsRepository: ContactsRepository,
+    ) = AcceptContactRequestUseCase(contactsRepository)
+
+    @Provides
+    @Singleton
+    fun provideDeclineContactRequestUseCase(
+        contactsRepository: ContactsRepository,
+    ) = DeclineContactRequestUseCase(contactsRepository)
+
+    @Provides
+    @Singleton
+    fun provideBlockUserUseCase(
+        userRepository: UserRepository,
+    ) = BlockUserUseCase(userRepository)
+
+    @Provides
+    @Singleton
+    fun provideUnblockUserUseCase(
+        userRepository: UserRepository,
+    ) = UnblockUserUseCase(userRepository)
 
     @Provides
     @Singleton
     fun provideGetContactsUseCase(
-        contactsRepository: ContactsRepository
+        contactsRepository: ContactsRepository,
     ) = GetContactsUseCase(contactsRepository)
 
     @Provides
     @Singleton
     fun provideGetUsersByIdsUseCase(
-        userRepository: UserRepository
+        userRepository: UserRepository,
     ) = GetUsersByIdsUseCase(userRepository)
 
     @Provides
     @Singleton
     fun provideUpdateProfileUseCase(
-        userRepository: UserRepository
+        userRepository: UserRepository,
     ) = UpdateProfileUseCase(userRepository)
 
     @Provides
@@ -105,12 +160,13 @@ object AppModule {
     @Provides
     @Singleton
     fun provideContactsRepository(
-        contactsRepositoryImpl: ContactsRepositoryImpl
+        contactsRepositoryImpl: ContactsRepositoryImpl,
     ): ContactsRepository = contactsRepositoryImpl
 
 
     @Provides
-    @Singleton fun provideHttpClient(): HttpClient {
+    @Singleton
+    fun provideHttpClient(): HttpClient {
         return HttpClient(CIO) {
             install(Logging)
             install(WebSockets)
@@ -143,7 +199,7 @@ object AppModule {
     @Provides
     @Singleton
     fun provideImageLoader(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
     ): ImageLoader = ImageLoader.Builder(context)
         .crossfade(true)
         .build()

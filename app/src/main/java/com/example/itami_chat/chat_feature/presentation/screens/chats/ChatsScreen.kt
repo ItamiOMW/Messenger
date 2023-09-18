@@ -60,10 +60,11 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun ChatsScreen(
+    onShowSnackbar: (message: String) -> Unit,
     onNavigateToRoute: (route: String) -> Unit,
     onNavigateToGroupChat: (chatId: Int) -> Unit,
     onNavigateToDialogChat: (dialogUserId: Int) -> Unit,
-    onNavigateToSearch: () -> Unit,
+    onNavigateToSearchUsers: () -> Unit,
     onNavigateToNewMessage: () -> Unit,
     onNavigateToCreateNewGroup: () -> Unit,
     onNavigateToSettings: () -> Unit,
@@ -75,7 +76,9 @@ fun ChatsScreen(
     LaunchedEffect(key1 = true) {
         uiEvent.collect { event ->
             when (event) {
-                else -> {}
+                is ChatsUiEvent.OnShowSnackbar -> {
+                    onShowSnackbar(event.message)
+                }
             }
         }
     }
@@ -142,7 +145,7 @@ fun ChatsScreen(
                         },
                         actions = {
                             IconButton(
-                                onClick = { onNavigateToSearch() }
+                                onClick = { onNavigateToSearchUsers() }
                             ) {
                                 Icon(
                                     painter = painterResource(id = R.drawable.ic_search),
@@ -291,10 +294,11 @@ fun ChatsScreenPreview() {
             onNavigateToRoute = {},
             onNavigateToGroupChat = { },
             onNavigateToDialogChat = { },
-            onNavigateToSearch = { },
+            onNavigateToSearchUsers = { },
             onNavigateToNewMessage = { },
             onNavigateToCreateNewGroup = {},
             onNavigateToSettings = { },
+            onShowSnackbar = {},
             state = ChatsState().copy(
                 myUser = MyUser(
                     0,

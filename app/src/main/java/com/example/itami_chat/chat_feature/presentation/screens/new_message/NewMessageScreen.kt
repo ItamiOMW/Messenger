@@ -200,8 +200,7 @@ fun NewMessageScreen(
                         textStyle = MaterialTheme.typography.bodyLarge
                     )
                 }
-                Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
-                Divider(thickness = 2.dp, color = MaterialTheme.colorScheme.outlineVariant)
+                Divider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
                 if (state.contacts.isNotEmpty()) {
                     LazyColumn(

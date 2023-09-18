@@ -70,6 +70,17 @@ sealed class Screen(protected val route: String, vararg params: String) {
         }
     }
 
+    data object UserProfile : Screen(USER_PROFILE_ROUTE, USER_ID_ARG) {
+        fun getRouteWithArgs(userId: Int): String {
+            return route.appendParams(USER_ID_ARG to userId)
+        }
+    }
+
+    data object EditProfile : Screen(EDIT_PROFILE_ROUTE)
+
+    data object SearchUsers : Screen(SEARCH_USERS_ROUTE)
+
+
     data object Settings : Screen(SETTINGS_SCREEN_ROUTE)
 
     data object Contacts : Screen(CONTACTS_SCREEN_ROUTE)
@@ -97,6 +108,11 @@ sealed class Screen(protected val route: String, vararg params: String) {
         private const val CHAT_PROFILE_SCREEN_ROUTE = "chat_profile"
         private const val EDIT_CHAT_SCREEN_ROUTE = "edit_profile"
         private const val ADD_CHAT_PARTICIPANTS_SCREEN_ROUTE = "add_chat_participants"
+
+        //Profile feature
+        private const val USER_PROFILE_ROUTE = "user_profile"
+        private const val EDIT_PROFILE_ROUTE = "edit_profile"
+        private const val SEARCH_USERS_ROUTE = "search_users"
 
         //Settings feature
         private const val SETTINGS_SCREEN_ROUTE = "settings"

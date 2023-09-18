@@ -1,4 +1,4 @@
-package com.example.itami_chat.core.domain.usecase
+package com.example.itami_chat.core.domain.use_case
 
 import com.example.itami_chat.core.domain.model.AppResponse
 import com.example.itami_chat.core.domain.model.SimpleUser

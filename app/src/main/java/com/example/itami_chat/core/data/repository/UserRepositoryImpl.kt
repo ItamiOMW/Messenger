@@ -6,6 +6,7 @@ import androidx.core.net.toUri
 import com.example.itami_chat.R
 import com.example.itami_chat.core.data.mapper.toMyUser
 import com.example.itami_chat.core.data.mapper.toSimpleUser
+import com.example.itami_chat.core.data.mapper.toUserProfile
 import com.example.itami_chat.core.data.preferences.auth.AuthManager
 import com.example.itami_chat.core.domain.preferences.UserManager
 import com.example.itami_chat.core.data.remote.dto.response.FailedApiResponse
@@ -87,7 +88,35 @@ class UserRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getUserProfile(id: Int): AppResponse<UserProfile> {
-        TODO("Not yet implemented")
+        return try {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
+                return AppResponse.failed(PoorNetworkConnectionException)
+            }
+
+            val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
+
+            val response = userApiService.getProfile(token = "Bearer $token", id = id)
+
+            if (response.isSuccessful) {
+                val profile = response.body()?.data?.toUserProfile() ?: return AppResponse.failed(ServerErrorException)
+                return AppResponse.success(profile)
+            }
+
+            val failedApiResponse = gson.fromJson(
+                response.errorBody()?.charStream(), FailedApiResponse::class.java
+            )
+            val exception = failedApiResponse.toException()
+
+            return AppResponse.failed(
+                exception = exception,
+                message = failedApiResponse?.message
+            )
+        } catch (e: IOException) {
+            AppResponse.failed(e, application.getString(R.string.error_couldnt_reach_server))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppResponse.failed(e, application.getString(R.string.error_unknown))
+        }
     }
 
     override suspend fun getUsersByIds(userIds: List<Int>): AppResponse<List<SimpleUser>> {
@@ -120,12 +149,92 @@ class UserRepositoryImpl @Inject constructor(
         }
     }
 
+    override suspend fun searchForUsers(query: String): AppResponse<List<SimpleUser>> {
+        return try {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
+                return AppResponse.failed(PoorNetworkConnectionException)
+            }
+
+            val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
+            val response = userApiService.searchForUsers(token = "Bearer $token", query)
+            if (response.isSuccessful) {
+                val users = response.body()?.data?.map { it.toSimpleUser() } ?: emptyList()
+                return AppResponse.success(users)
+            }
+
+            val failedApiResponse = gson.fromJson(
+                response.errorBody()?.charStream(), FailedApiResponse::class.java
+            )
+            val exception = failedApiResponse.toException()
+
+            return AppResponse.failed(
+                exception = exception,
+                message = failedApiResponse?.message
+            )
+        } catch (e: IOException) {
+            AppResponse.failed(e, application.getString(R.string.error_couldnt_reach_server))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppResponse.failed(e, application.getString(R.string.error_unknown))
+        }
+    }
+
     override suspend fun blockUser(id: Int): AppResponse<Unit> {
-        TODO("Not yet implemented")
+        return try {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
+                return AppResponse.failed(PoorNetworkConnectionException)
+            }
+
+            val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
+            val response = userApiService.blockUser(token = "Bearer $token", id)
+            if (response.isSuccessful) {
+                return AppResponse.success(Unit)
+            }
+
+            val failedApiResponse = gson.fromJson(
+                response.errorBody()?.charStream(), FailedApiResponse::class.java
+            )
+            val exception = failedApiResponse.toException()
+
+            return AppResponse.failed(
+                exception = exception,
+                message = failedApiResponse?.message
+            )
+        } catch (e: IOException) {
+            AppResponse.failed(e, application.getString(R.string.error_couldnt_reach_server))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppResponse.failed(e, application.getString(R.string.error_unknown))
+        }
     }
 
     override suspend fun unblockUser(id: Int): AppResponse<Unit> {
-        TODO("Not yet implemented")
+        return try {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
+                return AppResponse.failed(PoorNetworkConnectionException)
+            }
+
+            val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
+            val response = userApiService.unblockUser(token = "Bearer $token", id)
+            if (response.isSuccessful) {
+                return AppResponse.success(Unit)
+            }
+
+            val failedApiResponse = gson.fromJson(
+                response.errorBody()?.charStream(), FailedApiResponse::class.java
+            )
+            val exception = failedApiResponse.toException()
+
+            return AppResponse.failed(
+                exception = exception,
+                message = failedApiResponse?.message
+            )
+        } catch (e: IOException) {
+            AppResponse.failed(e, application.getString(R.string.error_couldnt_reach_server))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppResponse.failed(e, application.getString(R.string.error_unknown))
+        }
     }
 
     override suspend fun logout(): AppResponse<Unit> {

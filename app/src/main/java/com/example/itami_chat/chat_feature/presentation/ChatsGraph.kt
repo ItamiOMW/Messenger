@@ -45,7 +45,18 @@ fun NavGraphBuilder.chatsGraph(
         composable(Screen.Chats.fullRoute) {
             val viewModel: ChatsViewModel = hiltViewModel()
             ChatsScreen(
-                onNavigateToRoute = {},
+                onShowSnackbar = onShowSnackbar,
+                onNavigateToRoute = { route ->
+                    navController.navigate(route) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                },
                 onNavigateToGroupChat = { chat ->
                     navController.navigate(Screen.GroupChat.getRouteWithArgs(chat)) {
                         navController.currentDestination?.id?.let { id ->
@@ -68,7 +79,17 @@ fun NavGraphBuilder.chatsGraph(
                         launchSingleTop = true
                     }
                 },
-                onNavigateToSearch = { },
+                onNavigateToSearchUsers = {
+                    navController.navigate(Screen.SearchUsers.fullRoute) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                },
                 onNavigateToNewMessage = {
                     navController.navigate(Screen.NewMessage.fullRoute) {
                         navController.currentDestination?.id?.let { id ->
@@ -202,8 +223,16 @@ fun NavGraphBuilder.chatsGraph(
                         navController.popBackStack()
                     }
                 },
-                onNavigateToUserProfile = {
-
+                onNavigateToUserProfile = { userId ->
+                    navController.navigate(Screen.UserProfile.getRouteWithArgs(userId)) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
                 },
                 imageLoader = imageLoader,
                 state = viewModel.state,
@@ -240,8 +269,16 @@ fun NavGraphBuilder.chatsGraph(
                         launchSingleTop = true
                     }
                 },
-                onNavigateToUserProfile = {
-
+                onNavigateToUserProfile = { userId ->
+                    navController.navigate(Screen.UserProfile.getRouteWithArgs(userId)) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
                 },
                 imageLoader = imageLoader,
                 state = viewModel.state,
@@ -288,7 +325,15 @@ fun NavGraphBuilder.chatsGraph(
                     )
                 },
                 onNavigateToUserProfile = { userId ->
-
+                    navController.navigate(Screen.UserProfile.getRouteWithArgs(userId)) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
                 },
                 imageLoader = imageLoader,
                 state = viewModel.state,
@@ -310,6 +355,17 @@ fun NavGraphBuilder.chatsGraph(
                 onNavigateBack = { chat ->
                     if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
                         navController.popBackStackWithResult(chat)
+                    }
+                },
+                onNavigateToUserProfile = { userId ->
+                    navController.navigate(Screen.UserProfile.getRouteWithArgs(userId)) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
                     }
                 },
                 imageLoader = imageLoader,

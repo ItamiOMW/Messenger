@@ -16,6 +16,8 @@ interface UserRepository {
 
     suspend fun getUsersByIds(userIds: List<Int>): AppResponse<List<SimpleUser>>
 
+    suspend fun searchForUsers(query: String): AppResponse<List<SimpleUser>>
+
     suspend fun blockUser(id: Int): AppResponse<Unit>
 
     suspend fun unblockUser(id: Int): AppResponse<Unit>

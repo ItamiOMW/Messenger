@@ -269,6 +269,14 @@ class DialogChatViewModel @Inject constructor(
                         )
                     }
 
+                    is ChatEvent.Error -> {
+                        sendUiEvent(
+                            DialogChatUiEvent.OnShowSnackbar(
+                                chatEvent.message
+                            )
+                        )
+                    }
+
                     else -> Unit //Unexpected events in Dialog Chat
                 }
             }
