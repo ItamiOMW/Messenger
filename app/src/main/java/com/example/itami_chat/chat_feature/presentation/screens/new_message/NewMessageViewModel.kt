@@ -10,7 +10,7 @@ import com.example.itami_chat.R
 import com.example.itami_chat.core.domain.exception.PoorNetworkConnectionException
 import com.example.itami_chat.core.domain.model.AppResponse
 import com.example.itami_chat.core.domain.model.SimpleUser
-import com.example.itami_chat.core.domain.usecase.GetContactsUseCase
+import com.example.itami_chat.core.domain.use_case.GetContactsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel

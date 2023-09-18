@@ -139,7 +139,7 @@ fun CreateProfileScreen(
             ImagePickerComponent(
                 modifier = Modifier
                     .size(120.dp),
-                imageUri = { imageUriState },
+                imagePath = { imageUriState },
                 imageLoader = imageLoader,
                 onAddImageButtonClicked = {
                     launcher.launch(

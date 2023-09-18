@@ -19,4 +19,6 @@ sealed class ChatEvent {
     data class DeleteChatParticipant(val participantId: Int): ChatEvent()
 
     data class AddChatParticipants(val participants: List<ChatParticipant>): ChatEvent()
+
+    data class Error(val message: String): ChatEvent()
 }

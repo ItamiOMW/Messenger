@@ -14,7 +14,7 @@ import com.example.itami_chat.core.domain.exception.LongBioException
 import com.example.itami_chat.core.domain.exception.PoorNetworkConnectionException
 import com.example.itami_chat.core.domain.model.AppResponse
 import com.example.itami_chat.core.domain.model.UpdateProfileData
-import com.example.itami_chat.core.domain.usecase.UpdateProfileUseCase
+import com.example.itami_chat.core.domain.use_case.UpdateProfileUseCase
 import com.example.itami_chat.core.presentation.state.StandardTextFieldState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel

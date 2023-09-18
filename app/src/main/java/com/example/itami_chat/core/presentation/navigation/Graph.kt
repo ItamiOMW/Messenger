@@ -8,6 +8,8 @@ object Graph {
 
     const val CHATS_GRAPH = "chats_graph"
 
+    const val PROFILE_GRAPH = "profile_graph"
+
     const val SETTINGS_GRAPH = "settings_graph"
 
     const val CONTACTS_GRAPH = "contacts_graph"

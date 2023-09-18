@@ -132,7 +132,7 @@ fun MyMessageComponent(
                     text = {
                         Text(
                             text = stringResource(R.string.text_edit_message),
-                            style = MaterialTheme.typography.titleSmall
+                            style = MaterialTheme.typography.bodyLarge
                         )
                     },
                     leadingIcon = {
@@ -151,7 +151,7 @@ fun MyMessageComponent(
                     text = {
                         Text(
                             text = stringResource(R.string.text_delete_message),
-                            style = MaterialTheme.typography.titleSmall
+                            style = MaterialTheme.typography.bodyLarge
                         )
                     },
                     leadingIcon = {

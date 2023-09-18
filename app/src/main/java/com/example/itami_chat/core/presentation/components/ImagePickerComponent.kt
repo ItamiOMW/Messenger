@@ -1,6 +1,5 @@
 package com.example.itami_chat.core.presentation.components
 
-import android.net.Uri
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,7 +23,7 @@ import com.example.itami_chat.R
 
 @Composable
 fun ImagePickerComponent(
-    imageUri: () -> Uri?,
+    imagePath: () -> Any?,
     imageLoader: ImageLoader,
     onAddImageButtonClicked: () -> Unit,
     modifier: Modifier = Modifier,
@@ -34,9 +33,8 @@ fun ImagePickerComponent(
     fabContainerColor: Color = MaterialTheme.colorScheme.primary,
     iconColor: Color = MaterialTheme.colorScheme.onPrimary,
     fabShape: Shape = RoundedCornerShape(30.dp),
-    imageShape: Shape = RoundedCornerShape(180.dp)
+    imageShape: Shape = RoundedCornerShape(180.dp),
 ) {
-
     Box(
         modifier = modifier,
     ) {
@@ -45,7 +43,7 @@ fun ImagePickerComponent(
                 .align(Alignment.Center)
                 .size(imageSize)
                 .clip(imageShape),
-            model = imageUri(),
+            model = imagePath(),
             imageLoader = imageLoader,
             contentDescription = stringResource(R.string.desc_chosen_image),
             placeholder = painterResource(id = R.drawable.sniper_mask),

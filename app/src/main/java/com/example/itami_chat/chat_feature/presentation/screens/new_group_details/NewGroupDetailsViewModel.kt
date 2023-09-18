@@ -13,7 +13,7 @@ import com.example.itami_chat.chat_feature.domain.use_case.CreateChatUseCase
 import com.example.itami_chat.core.domain.exception.EmptyChatNameInputException
 import com.example.itami_chat.core.domain.exception.PoorNetworkConnectionException
 import com.example.itami_chat.core.domain.model.AppResponse
-import com.example.itami_chat.core.domain.usecase.GetUsersByIdsUseCase
+import com.example.itami_chat.core.domain.use_case.GetUsersByIdsUseCase
 import com.example.itami_chat.core.presentation.navigation.Screen
 import com.example.itami_chat.core.presentation.state.StandardTextFieldState
 import com.example.itami_chat.core.utils.toIntList

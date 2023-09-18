@@ -67,7 +67,7 @@ class ChatRepositoryImpl @Inject constructor(
             chatsSession = client.webSocketSession {
                 val token = authManager.token ?: throw UnauthorizedException
                 headers.append("Authorization", "Bearer $token")
-                url("ws://192.168.171.188:8000/api/v1/chats/ws")
+                url("ws://192.168.219.168:8000/api/v1/chats/ws")
             }
             val chatEvent = chatsSession
                 ?.incoming
@@ -94,7 +94,7 @@ class ChatRepositoryImpl @Inject constructor(
             messagesSession = client.webSocketSession {
                 val token = authManager.token ?: throw UnauthorizedException
                 headers.append("Authorization", "Bearer $token")
-                url("ws://192.168.171.188:8000/api/v1/chats/$chatId/ws")
+                url("ws://192.168.219.168:8000/api/v1/chats/$chatId/ws")
             }
             val chatEvent = messagesSession
                 ?.incoming
@@ -644,6 +644,10 @@ class ChatRepositoryImpl @Inject constructor(
                 val participants = gson.fromJson(json, Array<ChatParticipantResponse>::class.java)
                     .map { it.toChatParticipant() }
                 ChatEvent.AddChatParticipants(participants)
+            }
+
+            WebSocketEvent.ERROR -> {
+                ChatEvent.Error(json)
             }
         }
     }

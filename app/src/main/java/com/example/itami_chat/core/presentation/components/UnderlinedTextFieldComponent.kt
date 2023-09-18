@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
@@ -18,9 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.example.itami_chat.core.domain.model.Theme
 import com.example.itami_chat.core.presentation.ui.theme.ItamiChatTheme
+import com.example.itami_chat.core.presentation.ui.theme.spacing
 
 
 @Composable
@@ -51,12 +52,12 @@ fun UnderlinedTextFieldComponent(
                     text = error,
                     color = errorColor,
                     style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
-                    modifier = Modifier.padding(start = 5.dp)
+                    modifier = Modifier.padding(start = MaterialTheme.spacing.extraSmall)
                 )
             }
         }
         TextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = textValue(),
             onValueChange = onValueChange,
             enabled = enabled(),

@@ -35,7 +35,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -77,8 +76,6 @@ fun DialogChatScreen(
     onEvent: (DialogChatEvent) -> Unit,
 ) {
     val context = LocalContext.current
-
-    val coroutineScope = rememberCoroutineScope()
 
     val lazyListState = rememberLazyListState()
 
@@ -241,7 +238,7 @@ fun DialogChatScreen(
                                 text = {
                                     Text(
                                         text = stringResource(R.string.text_delete_chat),
-                                        style = MaterialTheme.typography.titleSmall
+                                        style = MaterialTheme.typography.bodyLarge
                                     )
                                 },
                                 leadingIcon = {

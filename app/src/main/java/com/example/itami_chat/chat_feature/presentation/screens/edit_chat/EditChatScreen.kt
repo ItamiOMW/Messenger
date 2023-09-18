@@ -58,6 +58,7 @@ import kotlinx.coroutines.flow.Flow
 fun EditChatScreen(
     onShowSnackbar: (message: String) -> Unit,
     onNavigateBack: (chat: Chat?) -> Unit,
+    onNavigateToUserProfile: (userId: Int) -> Unit,
     imageLoader: ImageLoader,
     state: EditChatState,
     chatNameState: StandardTextFieldState,
@@ -229,7 +230,7 @@ fun EditChatScreen(
                             top = MaterialTheme.padding.medium
                         ),
                 )
-                Divider(thickness = 2.dp, color = MaterialTheme.colorScheme.outlineVariant)
+                Divider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
                 Spacer(modifier = Modifier.height(MaterialTheme.spacing.small))
                 LazyColumn {
                     if (state.chat != null && state.me != null) {
@@ -245,7 +246,9 @@ fun EditChatScreen(
                                     .animateItemPlacement()
                                     .fillMaxWidth()
                                     .clickable {
-                                        //Todo open user profile
+                                        if (participant.user.id != state.me.user.id) {
+                                            onNavigateToUserProfile(participant.user.id)
+                                        }
                                     }
                                     .padding(
                                         start = MaterialTheme.padding.small,

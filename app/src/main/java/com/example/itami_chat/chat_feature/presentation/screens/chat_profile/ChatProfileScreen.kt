@@ -164,7 +164,7 @@ fun ChatProfileScreen(
                                     )
                                 }
                             }
-                            Spacer(modifier = Modifier.width(MaterialTheme.spacing.small))
+                            Spacer(modifier = Modifier.width(MaterialTheme.spacing.medium))
                             Column {
                                 Column(
                                     verticalArrangement = Arrangement.spacedBy(3.dp)
@@ -308,7 +308,9 @@ fun ChatProfileScreen(
                                     .animateItemPlacement()
                                     .fillMaxWidth()
                                     .clickable {
-                                        onNavigateToUserProfile(participant.user.id)
+                                        if (participant.user.id != state.me?.user?.id) {
+                                            onNavigateToUserProfile(participant.user.id)
+                                        }
                                     }
                                     .padding(
                                         start = MaterialTheme.padding.small,
