@@ -158,7 +158,6 @@ fun NewGroupParticipantsScreen(
                             )
                         }
                     }
-
                 }
             )
         },

@@ -36,8 +36,43 @@ class ContactsRepositoryImpl @Inject constructor(
             val response = contactsApiService.getContacts("Bearer $token")
 
             if (response.isSuccessful) {
-                val contacts = response.body()?.data ?: return AppResponse.failed(ServerErrorException)
-                return AppResponse.success(contacts.map { it.toSimpleUser() })
+                val contacts = response.body()?.data?.map {
+                    it.toSimpleUser()
+                } ?: return AppResponse.failed(ServerErrorException)
+                return AppResponse.success(contacts)
+            }
+
+            val failedApiResponse = gson.fromJson(
+                response.errorBody()?.charStream(), FailedApiResponse::class.java
+            )
+            val exception = failedApiResponse.toException()
+
+            return AppResponse.failed(
+                exception = exception,
+                message = failedApiResponse?.message
+            )
+        } catch (e: IOException) {
+            AppResponse.failed(e, application.getString(R.string.error_couldnt_reach_server))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            AppResponse.failed(e, application.getString(R.string.error_unknown))
+
+        }
+    }
+
+    override suspend fun getContactRequests(): AppResponse<List<ContactRequest>> {
+        return try {
+            if (!NetworkUtil.isNetworkAvailable(application)) {
+                return AppResponse.failed(PoorNetworkConnectionException)
+            }
+
+            val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
+            val response = contactsApiService.getContactRequests("Bearer $token")
+
+            if (response.isSuccessful) {
+                val contactRequests = response.body()?.data?.map { it.toContactRequest() }
+                    ?: return AppResponse.failed(ServerErrorException)
+                return AppResponse.success(contactRequests)
             }
 
             val failedApiResponse = gson.fromJson(
@@ -99,7 +134,10 @@ class ContactsRepositoryImpl @Inject constructor(
             val response = contactsApiService.sendContactRequest("Bearer $token", userId)
 
             if (response.isSuccessful) {
-                val contactRequest = response.body()?.data?.toContactRequest() ?: return AppResponse.failed(ServerErrorException)
+                val contactRequest =
+                    response.body()?.data?.toContactRequest() ?: return AppResponse.failed(
+                        ServerErrorException
+                    )
                 return AppResponse.success(contactRequest)
             }
 

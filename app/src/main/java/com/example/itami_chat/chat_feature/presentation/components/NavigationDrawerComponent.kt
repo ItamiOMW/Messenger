@@ -33,7 +33,7 @@ import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.example.itami_chat.R
 import com.example.itami_chat.core.domain.model.MyUser
-import com.example.itami_chat.core.presentation.navigation.NavigationItem
+import com.example.itami_chat.core.presentation.util.NavigationItem
 
 
 @Composable

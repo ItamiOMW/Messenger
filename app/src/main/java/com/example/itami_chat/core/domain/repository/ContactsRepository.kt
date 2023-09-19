@@ -8,6 +8,8 @@ interface ContactsRepository {
 
     suspend fun getContacts(): AppResponse<List<SimpleUser>>
 
+    suspend fun getContactRequests(): AppResponse<List<ContactRequest>>
+
     suspend fun deleteContact(userId: Int): AppResponse<Unit>
 
     suspend fun sendContactRequest(userId: Int): AppResponse<ContactRequest>
