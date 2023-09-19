@@ -18,6 +18,11 @@ interface ContactsApiService {
         @Header("Authorization") token: String,
     ): Response<ApiResponse<List<SimpleUserResponse>>>
 
+    @GET("api/v1/contacts/requests")
+    suspend fun getContactRequests(
+        @Header("Authorization") token: String,
+    ): Response<ApiResponse<List<ContactRequestResponse>>>
+
     @DELETE("api/v1/contacts/{userId}")
     suspend fun deleteContact(
         @Header("Authorization") token: String,

@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import coil.ImageLoader
 import com.example.itami_chat.authentication_feature.presentation.authGraph
 import com.example.itami_chat.chat_feature.presentation.chatsGraph
+import com.example.itami_chat.contacts_feature.presentation.contactsGraph
 import com.example.itami_chat.profile_feature.presentation.profileGraph
 
 
@@ -36,6 +37,11 @@ fun RootNavGraph(
             onShowSnackbar = onShowSnackbar
         )
         profileGraph(
+            navController = navController,
+            imageLoader = imageLoader,
+            onShowSnackbar = onShowSnackbar
+        )
+        contactsGraph(
             navController = navController,
             imageLoader = imageLoader,
             onShowSnackbar = onShowSnackbar

@@ -49,7 +49,7 @@ import com.example.itami_chat.chat_feature.presentation.components.NavigationDra
 import com.example.itami_chat.core.domain.model.MessagesPermission
 import com.example.itami_chat.core.domain.model.MyUser
 import com.example.itami_chat.core.domain.model.Theme
-import com.example.itami_chat.core.presentation.navigation.NavigationItem
+import com.example.itami_chat.core.presentation.util.NavigationItem
 import com.example.itami_chat.core.presentation.ui.theme.ItamiChatTheme
 import com.example.itami_chat.core.presentation.ui.theme.padding
 import kotlinx.coroutines.flow.Flow

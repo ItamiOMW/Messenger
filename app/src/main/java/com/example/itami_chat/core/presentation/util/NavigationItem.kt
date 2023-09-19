@@ -1,8 +1,10 @@
-package com.example.itami_chat.core.presentation.navigation
+package com.example.itami_chat.core.presentation.util
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import com.example.itami_chat.R
+import com.example.itami_chat.core.presentation.navigation.Graph
+import com.example.itami_chat.core.presentation.navigation.Screen
 
 sealed class NavigationItem(
     @StringRes val titleResId: Int,
