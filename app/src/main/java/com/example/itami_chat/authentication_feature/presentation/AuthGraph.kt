@@ -3,7 +3,6 @@ package com.example.itami_chat.authentication_feature.presentation
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavType
 import androidx.navigation.compose.composable
@@ -53,9 +52,9 @@ fun NavGraphBuilder.authGraph(
                 },
                 onNavigateToChats = {
                     navController.navigate(
-                        Graph.CHATS_GRAPH,
+                        Graph.CHATS_GRAPH
                     ) {
-                        popUpTo(navController.graph.findStartDestination().id) {
+                        popUpTo(navController.graph.id) {
                             inclusive = true
                         }
                     }
@@ -98,13 +97,12 @@ fun NavGraphBuilder.authGraph(
             LoginScreen(
                 onNavigateToChats = {
                     navController.navigate(
-                        Graph.CHATS_GRAPH,
+                        Graph.CHATS_GRAPH
                     ) {
-                        popUpTo(Screen.Splash.fullRoute) {
+                        popUpTo(navController.graph.id) {
                             inclusive = true
                         }
                     }
-                    navController.graph.setStartDestination(Graph.CHATS_GRAPH)
                 },
                 onNavigateToVerifyEmail = { email ->
                     navController.navigate(Screen.VerifyEmail.getRouteWithArgs(email)) {
@@ -202,13 +200,12 @@ fun NavGraphBuilder.authGraph(
             CreateProfileScreen(
                 onNavigateToChats = {
                     navController.navigate(
-                        Graph.CHATS_GRAPH,
+                        Graph.CHATS_GRAPH
                     ) {
-                        popUpTo(Screen.Splash.fullRoute) {
+                        popUpTo(navController.graph.id) {
                             inclusive = true
                         }
                     }
-                    navController.graph.setStartDestination(Graph.CHATS_GRAPH)
                 },
                 onNavigateBack = {
                     if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {

@@ -43,6 +43,17 @@ fun NavGraphBuilder.contactsGraph(
                         launchSingleTop = true
                     }
                 },
+                onNavigateToUserProfile = { userId ->
+                    navController.navigate(Screen.UserProfile.getRouteWithArgs(userId)) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                },
                 imageLoader = imageLoader,
                 state = viewModel.state,
                 theme = viewModel.theme,

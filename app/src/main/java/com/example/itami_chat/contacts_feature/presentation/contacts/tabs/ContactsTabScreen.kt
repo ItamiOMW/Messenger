@@ -1,6 +1,7 @@
 package com.example.itami_chat.contacts_feature.presentation.contacts.tabs
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +29,7 @@ fun ContactsTabScreen(
     isLoadingContacts: () -> Boolean,
     isLoading: () -> Boolean,
     onEvent: (event: ContactsEvent) -> Unit,
+    onContactClicked: (contactId: Int) -> Unit,
 ) {
 
     val pullRefreshState = rememberPullRefreshState(
@@ -57,6 +59,9 @@ fun ContactsTabScreen(
                     modifier = Modifier
                         .animateItemPlacement()
                         .fillMaxWidth()
+                        .clickable {
+                            onContactClicked(user.id)
+                        }
                         .padding(
                             start = MaterialTheme.padding.small,
                             end = MaterialTheme.padding.small,

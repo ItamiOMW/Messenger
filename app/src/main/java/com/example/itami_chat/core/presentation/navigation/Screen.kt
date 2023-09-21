@@ -80,10 +80,23 @@ sealed class Screen(protected val route: String, vararg params: String) {
 
     data object SearchUsers : Screen(SEARCH_USERS_ROUTE)
 
+    data object Contacts : Screen(CONTACTS_SCREEN_ROUTE)
 
     data object Settings : Screen(SETTINGS_SCREEN_ROUTE)
 
-    data object Contacts : Screen(CONTACTS_SCREEN_ROUTE)
+    data object AccountSetting: Screen(ACCOUNT_SETTING_SCREEN_ROUTE)
+
+    data object VerifyPasswordChange: Screen(VERIFY_PASSWORD_CHANGE_SCREEN_ROUTE)
+
+    data object ChangePassword: Screen(CHANGE_PASSWORD_SCREEN_ROUTE)
+
+    data object PrivacySetting: Screen(PRIVACY_SETTING_SCREEN_ROUTE)
+
+    data object BlockedUsers: Screen(BLOCKED_USERS_SCREEN_ROUTE)
+
+    data object MessagesPermission: Screen(MESSAGES_PERMISSION_SCREEN_ROUTE)
+
+    data object AppearanceSetting: Screen(APPEARANCE_SETTING_SCREEN_ROUTE)
 
 
     companion object {
@@ -116,6 +129,13 @@ sealed class Screen(protected val route: String, vararg params: String) {
 
         //Settings feature
         private const val SETTINGS_SCREEN_ROUTE = "settings"
+        private const val ACCOUNT_SETTING_SCREEN_ROUTE = "account_settings"
+        private const val APPEARANCE_SETTING_SCREEN_ROUTE = "appearance_settings"
+        private const val VERIFY_PASSWORD_CHANGE_SCREEN_ROUTE = "verify_password_change"
+        private const val CHANGE_PASSWORD_SCREEN_ROUTE = "change_password"
+        private const val PRIVACY_SETTING_SCREEN_ROUTE = "privacy_setting"
+        private const val BLOCKED_USERS_SCREEN_ROUTE = "blocked_users"
+        private const val MESSAGES_PERMISSION_SCREEN_ROUTE = "messages_permission"
 
         //Contacts feature
         private const val CONTACTS_SCREEN_ROUTE = "contacts"

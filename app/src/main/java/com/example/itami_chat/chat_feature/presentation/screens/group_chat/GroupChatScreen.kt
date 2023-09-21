@@ -53,7 +53,7 @@ import coil.compose.AsyncImage
 import com.example.itami_chat.R
 import com.example.itami_chat.chat_feature.domain.model.MessageType
 import com.example.itami_chat.chat_feature.domain.model.ParticipantRole
-import com.example.itami_chat.core.presentation.components.DeleteDialogComponent
+import com.example.itami_chat.core.presentation.components.DefaultDialogComponent
 import com.example.itami_chat.chat_feature.presentation.components.EditMessageTextField
 import com.example.itami_chat.chat_feature.presentation.components.GroupMessageComponent
 import com.example.itami_chat.chat_feature.presentation.components.MyMessageComponent
@@ -125,7 +125,7 @@ fun GroupChatScreen(
     }
 
     if (state.showLeaveChatDialog && state.chat != null) {
-        DeleteDialogComponent(
+        DefaultDialogComponent(
             title = stringResource(id = R.string.text_leave_chat),
             text = stringResource(
                 id = if (state.me?.role == ParticipantRole.CREATOR) {
@@ -147,7 +147,7 @@ fun GroupChatScreen(
     }
 
     if (state.showDeleteMessageDialog && state.messageToDelete != null) {
-        DeleteDialogComponent(
+        DefaultDialogComponent(
             title = stringResource(id = R.string.text_delete_message),
             text = stringResource(id = R.string.text_delete_message_warning),
             confirmButtonText = stringResource(id = R.string.text_delete_message),

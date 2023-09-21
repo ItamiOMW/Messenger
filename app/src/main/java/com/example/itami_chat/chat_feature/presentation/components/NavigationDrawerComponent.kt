@@ -28,11 +28,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
 import coil.compose.AsyncImage
 import com.example.itami_chat.R
 import com.example.itami_chat.core.domain.model.MyUser
+import com.example.itami_chat.core.presentation.ui.theme.padding
 import com.example.itami_chat.core.presentation.util.NavigationItem
 
 
@@ -60,7 +62,7 @@ fun NavigationDrawerComponent(
                 .fillMaxWidth()
                 .height(120.dp)
                 .background(headerColor)
-                .padding(start = 10.dp),
+                .padding(start = MaterialTheme.padding.small),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -80,11 +82,15 @@ fun NavigationDrawerComponent(
                     text = myUser.fullName,
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     color = onHeaderColor,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = myUser.email,
                     style = MaterialTheme.typography.bodyMedium,
                     color = onHeaderColor.copy(0.6f),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
@@ -96,7 +102,7 @@ fun NavigationDrawerComponent(
             verticalArrangement = Arrangement.SpaceBetween
         ) {
             LazyColumn(
-                modifier = Modifier.padding(top = 6.dp)
+                modifier = Modifier.padding(top = MaterialTheme.padding.extraSmall)
             ) {
                 items(items) { item ->
                     NavigationDrawerItem(
@@ -135,7 +141,7 @@ fun NavigationDrawerComponent(
                 Divider(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(start = 10.dp, end = 10.dp),
+                        .padding(start = MaterialTheme.padding.small, end = MaterialTheme.padding.small),
                     thickness = 1.dp,
                     color = MaterialTheme.colorScheme.inverseOnSurface
                 )
@@ -173,7 +179,7 @@ fun NavigationDrawerComponent(
                         }
                     )
                     IconButton(
-                        modifier = Modifier.padding(16.dp),
+                        modifier = Modifier.padding(MaterialTheme.padding.medium),
                         onClick = { onChangeDarkModeState() }
                     ) {
                         Icon(

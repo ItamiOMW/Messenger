@@ -27,7 +27,7 @@ import com.example.itami_chat.core.presentation.ui.theme.spacing
 
 
 @Composable
-fun DeleteDialogComponent(
+fun DefaultDialogComponent(
     title: String,
     text: String,
     confirmButtonText: String,
@@ -66,7 +66,7 @@ fun DeleteDialogComponent(
                     textAlign = TextAlign.Center
                 )
                 Row(
-                    modifier = Modifier.align(Alignment.End),
+                    modifier = Modifier.align(Alignment.CenterHorizontally),
                     horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.medium)
                 ) {
                     TextButton(
