@@ -55,6 +55,7 @@ fun ContactsScreen(
     onShowSnackbar: (message: String) -> Unit,
     onNavigateBack: () -> Unit,
     onNavigateToSearchUsers: () -> Unit,
+    onNavigateToUserProfile: (userId: Int) -> Unit,
     imageLoader: ImageLoader,
     state: ContactsState,
     theme: Theme,
@@ -86,7 +87,8 @@ fun ContactsScreen(
                         contacts = { state.contacts },
                         isLoadingContacts = { state.isLoadingContacts },
                         isLoading = { state.isLoading },
-                        onEvent = onEvent
+                        onEvent = onEvent,
+                        onContactClicked = onNavigateToUserProfile
                     )
                 }
             ),
@@ -208,7 +210,7 @@ fun ContactsScreen(
                         if (pagerState.currentPage < tabPositions.size) {
                             TabRowDefaults.Indicator(
                                 Modifier.tabIndicatorOffset(tabPositions[pagerState.currentPage]),
-                                color = if (theme == Theme.Blue && isDarkMode) MaterialTheme.colorScheme.onSurface
+                                color = if (theme == Theme.Blue && !isDarkMode) MaterialTheme.colorScheme.onSurface
                                 else MaterialTheme.colorScheme.primary
                             )
                         }
@@ -226,7 +228,7 @@ fun ContactsScreen(
                                 Text(
                                     text = stringResource(id = tabItem.titleId),
                                     style = MaterialTheme.typography.bodyLarge,
-                                    color = if (theme == Theme.Blue && isDarkMode) MaterialTheme.colorScheme.onSurface
+                                    color = if (theme == Theme.Blue && !isDarkMode) MaterialTheme.colorScheme.onSurface
                                     else MaterialTheme.colorScheme.primary
                                 )
                             }

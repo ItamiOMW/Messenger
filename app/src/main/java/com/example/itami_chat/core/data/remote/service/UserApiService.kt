@@ -17,7 +17,6 @@ import retrofit2.http.Query
 
 interface UserApiService {
 
-
     @Multipart
     @PUT("api/v1/users/profile/update")
     suspend fun updateProfile(

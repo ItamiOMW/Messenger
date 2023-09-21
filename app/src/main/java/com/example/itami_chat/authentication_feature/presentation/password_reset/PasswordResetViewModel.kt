@@ -155,7 +155,7 @@ class PasswordResetViewModel @Inject constructor(
             }
 
             is ShortPasswordException -> {
-                state = state.copy(
+                passwordState = passwordState.copy(
                     errorMessage = application.getString(R.string.error_short_password)
                 )
             }

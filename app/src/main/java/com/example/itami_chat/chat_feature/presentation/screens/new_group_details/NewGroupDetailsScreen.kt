@@ -248,7 +248,7 @@ fun NewGroupDetailsScreen(
                     }
                 }
             }
-            if (state.isCreatingChat && state.isLoadingParticipants) {
+            if (state.isCreatingChat || state.isLoadingParticipants) {
                 CircularProgressIndicator(
                     color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.align(Alignment.Center)

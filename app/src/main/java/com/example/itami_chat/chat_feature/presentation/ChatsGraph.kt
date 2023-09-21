@@ -112,7 +112,17 @@ fun NavGraphBuilder.chatsGraph(
                         launchSingleTop = true
                     }
                 },
-                onNavigateToSettings = { },
+                onNavigateToSettings = {
+                    navController.navigate(Screen.Settings.fullRoute) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                },
                 imageLoader = imageLoader,
                 state = viewModel.state,
                 onEvent = viewModel::onEvent,
@@ -123,7 +133,17 @@ fun NavGraphBuilder.chatsGraph(
             val viewModel: NewMessageViewModel = hiltViewModel()
             NewMessageScreen(
                 onShowSnackbar = onShowSnackbar,
-                onNavigateToSearchUsers = { },
+                onNavigateToSearchUsers = {
+                    navController.navigate(Screen.SearchUsers.fullRoute) {
+                        navController.currentDestination?.id?.let { id ->
+                            this.popUpTo(id) {
+                                saveState = true
+                            }
+                        }
+                        restoreState = true
+                        launchSingleTop = true
+                    }
+                },
                 onNavigateToNewGroup = {
                     navController.navigate(Screen.NewGroupParticipants.fullRoute) {
                         navController.currentDestination?.id?.let { id ->

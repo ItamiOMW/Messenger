@@ -22,6 +22,7 @@ import com.example.itami_chat.core.domain.use_case.DeclineContactRequestUseCase
 import com.example.itami_chat.core.domain.use_case.DeleteContactUseCase
 import com.example.itami_chat.core.domain.use_case.GetContactsUseCase
 import com.example.itami_chat.core.domain.use_case.GetUsersByIdsUseCase
+import com.example.itami_chat.core.domain.use_case.LogoutUseCase
 import com.example.itami_chat.core.domain.use_case.SearchForUsersUseCase
 import com.example.itami_chat.core.domain.use_case.SendContactRequestUseCase
 import com.example.itami_chat.core.domain.use_case.UnblockUserUseCase
@@ -46,6 +47,12 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    @Provides
+    @Singleton
+    fun provideLogoutUseCase(
+        userRepository: UserRepository,
+    ) = LogoutUseCase(userRepository)
 
     @Provides
     @Singleton

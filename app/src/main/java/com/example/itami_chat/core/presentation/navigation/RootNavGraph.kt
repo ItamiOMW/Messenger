@@ -9,6 +9,7 @@ import com.example.itami_chat.authentication_feature.presentation.authGraph
 import com.example.itami_chat.chat_feature.presentation.chatsGraph
 import com.example.itami_chat.contacts_feature.presentation.contactsGraph
 import com.example.itami_chat.profile_feature.presentation.profileGraph
+import com.example.itami_chat.settings_feature.presentation.settingsGraph
 
 
 @Composable
@@ -42,6 +43,11 @@ fun RootNavGraph(
             onShowSnackbar = onShowSnackbar
         )
         contactsGraph(
+            navController = navController,
+            imageLoader = imageLoader,
+            onShowSnackbar = onShowSnackbar
+        )
+        settingsGraph(
             navController = navController,
             imageLoader = imageLoader,
             onShowSnackbar = onShowSnackbar

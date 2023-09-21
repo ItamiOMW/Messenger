@@ -53,7 +53,7 @@ import com.example.itami_chat.R
 import com.example.itami_chat.chat_feature.presentation.components.DialogMessageComponent
 import com.example.itami_chat.chat_feature.presentation.components.EditMessageTextField
 import com.example.itami_chat.chat_feature.presentation.components.MyMessageComponent
-import com.example.itami_chat.core.presentation.components.DeleteDialogComponent
+import com.example.itami_chat.core.presentation.components.DefaultDialogComponent
 import com.example.itami_chat.core.presentation.state.StandardTextFieldState
 import com.example.itami_chat.core.presentation.ui.theme.padding
 import com.example.itami_chat.core.presentation.ui.theme.spacing
@@ -127,7 +127,7 @@ fun DialogChatScreen(
     }
 
     if (state.showDeleteChatDialog && state.dialogUser != null) {
-        DeleteDialogComponent(
+        DefaultDialogComponent(
             title = stringResource(id = R.string.text_delete_chat),
             text = stringResource(
                 id = R.string.text_delete_dialog_chat_warning,
@@ -144,7 +144,7 @@ fun DialogChatScreen(
     }
 
     if (state.showDeleteMessageDialog && state.messageToDelete != null) {
-        DeleteDialogComponent(
+        DefaultDialogComponent(
             title = stringResource(id = R.string.text_delete_message),
             text = stringResource(id = R.string.text_delete_message_warning),
             confirmButtonText = stringResource(id = R.string.text_delete_message),

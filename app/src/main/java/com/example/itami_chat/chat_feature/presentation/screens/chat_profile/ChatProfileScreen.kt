@@ -50,7 +50,7 @@ import com.example.itami_chat.chat_feature.domain.model.Chat
 import com.example.itami_chat.chat_feature.domain.model.ChatParticipant
 import com.example.itami_chat.chat_feature.domain.model.ParticipantRole
 import com.example.itami_chat.chat_feature.presentation.components.ChatParticipantComponent
-import com.example.itami_chat.core.presentation.components.DeleteDialogComponent
+import com.example.itami_chat.core.presentation.components.DefaultDialogComponent
 import com.example.itami_chat.core.presentation.components.IconToTextComponent
 import com.example.itami_chat.core.presentation.navigation.NavResultCallback
 import com.example.itami_chat.core.presentation.ui.theme.padding
@@ -106,7 +106,7 @@ fun ChatProfileScreen(
     }
 
     if (state.chat != null && state.showLeaveChatDialog) {
-        DeleteDialogComponent(
+        DefaultDialogComponent(
             title = stringResource(id = R.string.text_leave_chat),
             text = stringResource(
                 id = if (state.me?.role == ParticipantRole.CREATOR) {

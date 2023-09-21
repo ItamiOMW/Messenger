@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStoreFactory
 import androidx.datastore.dataStoreFile
 import com.example.itami_chat.core.data.mapper.toDataStoreUser
 import com.example.itami_chat.core.data.mapper.toMyUser
+import com.example.itami_chat.core.domain.model.MessagesPermission
 import com.example.itami_chat.core.domain.model.MyUser
 import com.example.itami_chat.core.domain.preferences.UserManager
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -24,6 +25,12 @@ class DataStoreUserManager @Inject constructor(
         dataStore.updateData {
             user?.toDataStoreUser()
                 ?: DataStoreUser()
+        }
+    }
+
+    override suspend fun changeMessagesPermission(permission: MessagesPermission) {
+        dataStore.updateData {
+            it.copy(messagesPermission = permission)
         }
     }
 
