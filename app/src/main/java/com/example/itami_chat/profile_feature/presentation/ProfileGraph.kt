@@ -1,6 +1,11 @@
 package com.example.itami_chat.profile_feature.presentation
 
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -35,7 +40,27 @@ fun NavGraphBuilder.profileGraph(
                 navArgument(Screen.USER_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) {
             val viewModel: UserProfileViewModel = hiltViewModel()
             UserProfileScreen(
@@ -62,7 +87,29 @@ fun NavGraphBuilder.profileGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.EditProfile.fullRoute) {
+        composable(
+            Screen.EditProfile.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: EditProfileViewModel = hiltViewModel()
             EditProfileScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -81,7 +128,29 @@ fun NavGraphBuilder.profileGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.SearchUsers.fullRoute) {
+        composable(
+            Screen.SearchUsers.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: SearchUsersViewModel = hiltViewModel()
             SearchUsersScreen(
                 onShowSnackbar = onShowSnackbar,

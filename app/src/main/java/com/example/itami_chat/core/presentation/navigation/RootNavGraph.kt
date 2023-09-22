@@ -20,7 +20,6 @@ fun RootNavGraph(
     imageLoader: ImageLoader,
     onShowSnackbar: (message: String) -> Unit,
 ) {
-
     NavHost(
         modifier = modifier,
         navController = navController,

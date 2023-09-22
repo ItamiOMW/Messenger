@@ -1,6 +1,11 @@
 package com.example.itami_chat.contacts_feature.presentation
 
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -23,7 +28,29 @@ fun NavGraphBuilder.contactsGraph(
         route = Graph.CONTACTS_GRAPH,
         startDestination = Screen.Contacts.fullRoute
     ) {
-        composable(Screen.Contacts.fullRoute) {
+        composable(
+            Screen.Contacts.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: ContactsViewModel = hiltViewModel()
             ContactsScreen(
                 onShowSnackbar = onShowSnackbar,

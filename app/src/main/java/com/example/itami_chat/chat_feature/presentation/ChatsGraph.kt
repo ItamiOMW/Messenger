@@ -1,5 +1,10 @@
 package com.example.itami_chat.chat_feature.presentation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -40,9 +45,21 @@ fun NavGraphBuilder.chatsGraph(
 ) {
     navigation(
         route = Graph.CHATS_GRAPH,
-        startDestination = Screen.Chats.fullRoute
+        startDestination = Screen.Chats.fullRoute,
     ) {
-        composable(Screen.Chats.fullRoute) {
+        composable(
+            Screen.Chats.fullRoute,
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            }
+        ) {
             val viewModel: ChatsViewModel = hiltViewModel()
             ChatsScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -129,7 +146,29 @@ fun NavGraphBuilder.chatsGraph(
                 uiEvent = viewModel.uiEvent
             )
         }
-        composable(Screen.NewMessage.fullRoute) {
+        composable(
+            Screen.NewMessage.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ){
             val viewModel: NewMessageViewModel = hiltViewModel()
             NewMessageScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -178,7 +217,29 @@ fun NavGraphBuilder.chatsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(route = Screen.NewGroupParticipants.fullRoute) {
+        composable(
+            route = Screen.NewGroupParticipants.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: NewGroupParticipantsViewModel = hiltViewModel()
             NewGroupParticipantsScreen(
                 onNavigateBack = {
@@ -205,6 +266,26 @@ fun NavGraphBuilder.chatsGraph(
         }
         composable(
             route = Screen.NewGroupDetails.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) {
             val viewModel: NewGroupDetailsViewModel = hiltViewModel()
             NewGroupDetailsScreen(
@@ -230,7 +311,27 @@ fun NavGraphBuilder.chatsGraph(
                 navArgument(Screen.USER_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) { backStackEntry ->
             val viewModel: DialogChatViewModel = hiltViewModel()
             val userId = backStackEntry.arguments?.getInt(Screen.USER_ID_ARG)
@@ -268,7 +369,27 @@ fun NavGraphBuilder.chatsGraph(
                 navArgument(Screen.CHAT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) {
             val viewModel: GroupChatViewModel = hiltViewModel()
             GroupChatScreen(
@@ -314,7 +435,27 @@ fun NavGraphBuilder.chatsGraph(
                 navArgument(Screen.CHAT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) {
             val viewModel: ChatProfileViewModel = hiltViewModel()
             ChatProfileScreen(
@@ -367,7 +508,27 @@ fun NavGraphBuilder.chatsGraph(
                 navArgument(Screen.CHAT_ID_ARG) {
                     type = NavType.IntType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) {
             val viewModel: EditChatViewModel = hiltViewModel()
             EditChatScreen(
@@ -402,6 +563,26 @@ fun NavGraphBuilder.chatsGraph(
                     type = NavType.IntType
                 }
             ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) {
             val viewModel: AddChatParticipantsViewModel = hiltViewModel()
             AddChatParticipantsScreen(
