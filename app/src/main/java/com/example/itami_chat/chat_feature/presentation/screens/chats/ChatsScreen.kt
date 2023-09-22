@@ -109,6 +109,9 @@ fun ChatsScreen(
                     ),
                     bottomNavigationItem = NavigationItem.SettingsFeature,
                     onItemClick = { navItem ->
+                        coroutineScope.launch {
+                            drawerState.close()
+                        }
                         onNavigateToRoute(navItem.route)
                     },
                     onChangeDarkModeState = {
@@ -180,7 +183,10 @@ fun ChatsScreen(
                                                 style = MaterialTheme.typography.titleSmall
                                             )
                                         },
-                                        onClick = { onNavigateToNewMessage() }
+                                        onClick = {
+                                            showMoreOptionsMenu.value = false
+                                            onNavigateToNewMessage()
+                                        }
                                     )
                                     DropdownMenuItem(
                                         text = {
@@ -189,7 +195,10 @@ fun ChatsScreen(
                                                 style = MaterialTheme.typography.titleSmall
                                             )
                                         },
-                                        onClick = { onNavigateToCreateNewGroup() }
+                                        onClick = {
+                                            showMoreOptionsMenu.value = false
+                                            onNavigateToCreateNewGroup()
+                                        }
                                     )
                                     DropdownMenuItem(
                                         text = {
@@ -198,7 +207,10 @@ fun ChatsScreen(
                                                 style = MaterialTheme.typography.titleSmall
                                             )
                                         },
-                                        onClick = { onNavigateToSettings() }
+                                        onClick = {
+                                            showMoreOptionsMenu.value = false
+                                            onNavigateToSettings()
+                                        }
                                     )
                                 }
                             }

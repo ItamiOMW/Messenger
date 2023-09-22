@@ -1,5 +1,10 @@
 package com.example.itami_chat.authentication_feature.presentation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -63,7 +68,19 @@ fun NavGraphBuilder.authGraph(
                 uiEvent = viewModel.uiEvent
             )
         }
-        composable(Screen.Onboarding.fullRoute) {
+        composable(
+            Screen.Onboarding.fullRoute,
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            }
+        ) {
             val viewModel: OnboardingViewModel = hiltViewModel()
             OnboardingScreen(
                 onNavigateToLogin = {
@@ -92,7 +109,29 @@ fun NavGraphBuilder.authGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.Login.fullRoute) {
+        composable(
+            Screen.Login.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: LoginViewModel = hiltViewModel()
             LoginScreen(
                 onNavigateToChats = {
@@ -138,7 +177,29 @@ fun NavGraphBuilder.authGraph(
                 uiEvent = viewModel.uiEvent
             )
         }
-        composable(Screen.Register.fullRoute) {
+        composable(
+            Screen.Register.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: RegisterViewModel = hiltViewModel()
             RegisterScreen(
                 onNavigateToVerifyEmail = { email ->
@@ -171,12 +232,31 @@ fun NavGraphBuilder.authGraph(
                 navArgument(Screen.EMAIL_ARG) {
                     type = NavType.StringType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) { navBackStackEntry ->
             val email = navBackStackEntry.arguments?.getString(Screen.EMAIL_ARG)
                 ?: throw RuntimeException("Missing email argument.")
             val viewModel: VerifyEmailViewModel = hiltViewModel()
-
             VerifyEmailScreen(
                 email = email,
                 onNavigateToCreateProfile = {
@@ -195,7 +275,9 @@ fun NavGraphBuilder.authGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(route = Screen.CreateProfile.fullRoute) {
+        composable(
+            route = Screen.CreateProfile.fullRoute,
+        ) {
             val viewModel: CreateProfileViewModel = hiltViewModel()
             CreateProfileScreen(
                 onNavigateToChats = {
@@ -224,7 +306,29 @@ fun NavGraphBuilder.authGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(route = Screen.ForgotPassword.fullRoute) {
+        composable(
+            route = Screen.ForgotPassword.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: ForgotPasswordViewModel = hiltViewModel()
             ForgotPasswordScreen(
                 onNavigateToPasswordReset = { email ->
@@ -255,7 +359,27 @@ fun NavGraphBuilder.authGraph(
                 navArgument(Screen.EMAIL_ARG) {
                     type = NavType.StringType
                 }
-            )
+            ),
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
         ) { navBackStackEntry ->
             val email = navBackStackEntry.arguments?.getString(Screen.EMAIL_ARG)
                 ?: throw RuntimeException("Missing email argument.")

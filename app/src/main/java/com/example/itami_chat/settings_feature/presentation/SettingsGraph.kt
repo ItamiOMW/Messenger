@@ -1,5 +1,10 @@
 package com.example.itami_chat.settings_feature.presentation
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
@@ -36,7 +41,29 @@ fun NavGraphBuilder.settingsGraph(
         route = Graph.SETTINGS_GRAPH,
         startDestination = Screen.Settings.fullRoute
     ) {
-        composable(Screen.Settings.fullRoute) {
+        composable(
+            Screen.Settings.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: SettingsViewModel = hiltViewModel()
             SettingsScreen(
                 onNavigateBack = {
@@ -112,7 +139,29 @@ fun NavGraphBuilder.settingsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.AccountSetting.fullRoute) {
+        composable(
+            Screen.AccountSetting.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: AccountSettingViewModel = hiltViewModel()
             AccountSettingScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -146,7 +195,29 @@ fun NavGraphBuilder.settingsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.VerifyPasswordChange.fullRoute) {
+        composable(
+            Screen.VerifyPasswordChange.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: VerifyPasswordChangeViewModel = hiltViewModel()
             VerifyPasswordChangeScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -172,7 +243,29 @@ fun NavGraphBuilder.settingsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.ChangePassword.fullRoute) {
+        composable(
+            Screen.ChangePassword.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: ChangePasswordViewModel = hiltViewModel()
             ChangePasswordScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -191,7 +284,29 @@ fun NavGraphBuilder.settingsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.PrivacySetting.fullRoute) {
+        composable(
+            Screen.PrivacySetting.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: PrivacySettingViewModel = hiltViewModel()
             PrivacySettingScreen(
                 onNavigateBack = {
@@ -224,7 +339,29 @@ fun NavGraphBuilder.settingsGraph(
                 state = viewModel.state,
             )
         }
-        composable(Screen.BlockedUsers.fullRoute) {
+        composable(
+            Screen.BlockedUsers.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: BlockedUsersViewModel = hiltViewModel()
             BlockedUsersScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -250,7 +387,29 @@ fun NavGraphBuilder.settingsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.MessagesPermission.fullRoute) {
+        composable(
+            Screen.MessagesPermission.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: MessagesPermissionViewModel = hiltViewModel()
             MessagesPermissionScreen(
                 onShowSnackbar = onShowSnackbar,
@@ -264,7 +423,29 @@ fun NavGraphBuilder.settingsGraph(
                 onEvent = viewModel::onEvent
             )
         }
-        composable(Screen.AppearanceSetting.fullRoute) {
+        composable(
+            Screen.AppearanceSetting.fullRoute,
+            enterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            exitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            },
+            popEnterTransition = {
+                slideInHorizontally(
+                    initialOffsetX = { -it }, animationSpec = tween(350)
+                ).plus(fadeIn(tween(350)))
+            },
+            popExitTransition = {
+                slideOutHorizontally(
+                    targetOffsetX = { it }, animationSpec = tween(350)
+                ).plus(fadeOut(tween(350)))
+            }
+        ) {
             val viewModel: AppearanceSettingViewModel = hiltViewModel()
             AppearanceSettingScreen(
                 onNavigateBack = {
