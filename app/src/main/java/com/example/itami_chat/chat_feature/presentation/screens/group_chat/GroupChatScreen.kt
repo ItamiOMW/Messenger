@@ -40,6 +40,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
@@ -181,6 +182,7 @@ fun GroupChatScreen(
                                     model = state.chat.chatPictureUrl,
                                     contentDescription = stringResource(R.string.desc_chat_picture),
                                     imageLoader = imageLoader,
+                                    contentScale = ContentScale.Crop,
                                     modifier = Modifier
                                         .padding(start = MaterialTheme.padding.small)
                                         .size(50.dp)

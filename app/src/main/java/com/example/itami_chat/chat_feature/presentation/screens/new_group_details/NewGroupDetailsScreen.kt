@@ -36,6 +36,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -173,6 +174,7 @@ fun NewGroupDetailsScreen(
                             model = state.chatPictureUri,
                             contentDescription = stringResource(id = R.string.desc_chat_picture),
                             imageLoader = imageLoader,
+                            contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .size(60.dp)
                                 .clip(RoundedCornerShape(30.dp))

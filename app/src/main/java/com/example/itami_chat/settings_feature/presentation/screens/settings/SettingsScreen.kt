@@ -26,6 +26,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -114,6 +115,7 @@ fun SettingsScreen(
                     model = state.myUser?.profilePictureUrl,
                     contentDescription = stringResource(R.string.desc_profile_picture),
                     imageLoader = imageLoader,
+                    contentScale = ContentScale.Crop,
                     error = painterResource(id = R.drawable.sniper_mask),
                     modifier = Modifier
                         .size(60.dp)

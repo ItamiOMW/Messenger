@@ -67,7 +67,7 @@ class ChatRepositoryImpl @Inject constructor(
             chatsSession = client.webSocketSession {
                 val token = authManager.token ?: throw UnauthorizedException
                 headers.append("Authorization", "Bearer $token")
-                url("ws://192.168.219.168:8000/api/v1/chats/ws")
+                url("ws://itami-chat-server.onrender.com/api/v1/chats/ws")
             }
             val chatEvent = chatsSession
                 ?.incoming
@@ -94,7 +94,7 @@ class ChatRepositoryImpl @Inject constructor(
             messagesSession = client.webSocketSession {
                 val token = authManager.token ?: throw UnauthorizedException
                 headers.append("Authorization", "Bearer $token")
-                url("ws://192.168.219.168:8000/api/v1/chats/$chatId/ws")
+                url("ws://itami-chat-server.onrender.com/api/v1/chats/$chatId/ws")
             }
             val chatEvent = messagesSession
                 ?.incoming

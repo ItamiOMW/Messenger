@@ -1,14 +1,12 @@
 package com.example.itami_chat.core.data.repository
 
 import android.app.Application
-import androidx.core.net.toFile
 import androidx.core.net.toUri
 import com.example.itami_chat.R
 import com.example.itami_chat.core.data.mapper.toMyUser
 import com.example.itami_chat.core.data.mapper.toSimpleUser
 import com.example.itami_chat.core.data.mapper.toUserProfile
 import com.example.itami_chat.core.data.preferences.auth.AuthManager
-import com.example.itami_chat.core.domain.preferences.UserManager
 import com.example.itami_chat.core.data.remote.dto.response.FailedApiResponse
 import com.example.itami_chat.core.data.remote.service.UserApiService
 import com.example.itami_chat.core.domain.exception.PoorNetworkConnectionException
@@ -18,11 +16,13 @@ import com.example.itami_chat.core.domain.model.AppResponse
 import com.example.itami_chat.core.domain.model.SimpleUser
 import com.example.itami_chat.core.domain.model.UpdateProfileData
 import com.example.itami_chat.core.domain.model.UserProfile
+import com.example.itami_chat.core.domain.preferences.UserManager
 import com.example.itami_chat.core.domain.repository.UserRepository
 import com.example.itami_chat.core.utils.NetworkUtil
 import com.google.gson.Gson
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import java.io.File
 import java.io.IOException
 import javax.inject.Inject
 
@@ -45,7 +45,8 @@ class UserRepositoryImpl @Inject constructor(
             }
 
             val token = authManager.token ?: return AppResponse.failed(UnauthorizedException)
-            val profilePictureFile = profilePictureUri?.toUri()?.toFile()
+            val profilePictureFile = profilePictureUri?.toUri()?.path?.let { File(it) }
+//            val profilePictureFile = profilePictureUri?.toUri()?.toFile()
 
             val response = userApiService.updateProfile(
                 token = "Bearer $token",
@@ -98,7 +99,9 @@ class UserRepositoryImpl @Inject constructor(
             val response = userApiService.getProfile(token = "Bearer $token", id = id)
 
             if (response.isSuccessful) {
-                val profile = response.body()?.data?.toUserProfile() ?: return AppResponse.failed(ServerErrorException)
+                val profile = response.body()?.data?.toUserProfile() ?: return AppResponse.failed(
+                    ServerErrorException
+                )
                 return AppResponse.success(profile)
             }
 

@@ -12,6 +12,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
@@ -45,6 +46,7 @@ fun ImagePickerComponent(
                 .clip(imageShape),
             model = imagePath(),
             imageLoader = imageLoader,
+            contentScale = ContentScale.Crop,
             contentDescription = stringResource(R.string.desc_chosen_image),
             placeholder = painterResource(id = R.drawable.sniper_mask),
             fallback = painterResource(id = R.drawable.sniper_mask),

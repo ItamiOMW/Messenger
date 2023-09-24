@@ -7,6 +7,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.ImageLoader
@@ -26,6 +27,7 @@ fun ImagesComponent(
         AsyncImage(
             modifier = Modifier.size(width = 150.dp, height = 330.dp),
             model = imageUrls.first(),
+            contentScale = ContentScale.Crop,
             contentDescription = stringResource(R.string.desc_image)
         )
     } else {

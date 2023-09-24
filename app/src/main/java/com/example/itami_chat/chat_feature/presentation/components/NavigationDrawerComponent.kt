@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
@@ -71,6 +72,7 @@ fun NavigationDrawerComponent(
                 contentDescription = stringResource(R.string.desc_profile_picture),
                 imageLoader = imageLoader,
                 error = painterResource(id = R.drawable.sniper_mask),
+                contentScale = ContentScale.Crop,
                 modifier = Modifier
                     .size(60.dp)
                     .clip(RoundedCornerShape(30.dp)),

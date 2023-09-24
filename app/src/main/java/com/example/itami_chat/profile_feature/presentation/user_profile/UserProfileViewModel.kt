@@ -117,6 +117,7 @@ class UserProfileViewModel @Inject constructor(
                 }
 
                 is AppResponse.Failed -> {
+                    result.exception.printStackTrace()
                     handleException(result.exception, result.message)
                 }
             }

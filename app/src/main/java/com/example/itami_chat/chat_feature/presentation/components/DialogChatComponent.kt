@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -94,6 +95,7 @@ fun DialogChatComponent(
             contentDescription = stringResource(id = R.string.desc_profile_picture),
             imageLoader = imageLoader,
             error = painterResource(id = R.drawable.sniper_mask),
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .padding(start = MaterialTheme.padding.small)
                 .size(60.dp)

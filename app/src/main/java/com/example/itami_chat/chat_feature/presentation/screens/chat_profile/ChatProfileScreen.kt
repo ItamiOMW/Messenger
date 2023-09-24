@@ -37,6 +37,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -142,6 +143,7 @@ fun ChatProfileScreen(
                                     model = state.chat.chatPictureUrl,
                                     contentDescription = stringResource(R.string.desc_chat_picture),
                                     imageLoader = imageLoader,
+                                    contentScale = ContentScale.Crop,
                                     modifier = Modifier
                                         .padding(start = MaterialTheme.padding.small)
                                         .size(if (isTopBarCollapsed) 50.dp else 60.dp)
