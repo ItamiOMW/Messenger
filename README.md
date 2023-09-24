@@ -28,6 +28,8 @@ where email is used for authorization.\
 
  - [Jetpack Compose](https://developer.android.com/jetpack/compose/documentation)
 
+ - [Compose Navgiation](https://developer.android.com/jetpack/compose/navigation)
+
  - [Compose Material 3](https://developer.android.com/jetpack/androidx/releases/compose-material3)
  
  - [Coroutines](https://developer.android.com/kotlin/coroutines)
