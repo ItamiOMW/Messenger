@@ -1,8 +1,8 @@
 # Itami Chat android application.
 
 The idea of the application was to create a mini-analogue of Telegram, 
-where email is used for authorization.__
-[Figma design](https://www.figma.com/file/Ls3lAJun9m7hCLMaPLQWrF/Itami-Chat?type=design&node-id=0%3A1&mode=design&t=vrFCl8PtCovoI9ZP-1)__
+where email is used for authorization.\
+[Figma design](https://www.figma.com/file/Ls3lAJun9m7hCLMaPLQWrF/Itami-Chat?type=design&node-id=0%3A1&mode=design&t=vrFCl8PtCovoI9ZP-1)\
 [Ktor backend](https://github.com/ItamiOWM/ktor-itami-chat)
 
 ## Features:
