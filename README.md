@@ -27,6 +27,8 @@ where email is used for authorization.
  - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel)
 
  - [Jetpack Compose](https://developer.android.com/jetpack/compose/documentation)
+
+ - [Compose Material 3](https://developer.android.com/jetpack/androidx/releases/compose-material3)
  
  - [Coroutines](https://developer.android.com/kotlin/coroutines)
 
@@ -41,8 +43,6 @@ where email is used for authorization.
  - [System ui conroller](https://google.github.io/accompanist/systemuicontroller/)
 
  - [Coil](https://coil-kt.github.io/coil/compose/)
-
- - [Compose Material 3](https://developer.android.com/jetpack/androidx/releases/compose-material3)
  
  - [DataStore Preferences](https://developer.android.com/topic/libraries/architecture/datastore)
 
