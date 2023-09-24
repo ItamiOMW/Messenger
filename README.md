@@ -63,4 +63,4 @@ where email is used for authorization.
 
 ## Screenshots (Default Light Theme):
   ![Chats Default Light](https://github.com/ItamiOWM/android-itami-chat/blob/master/art/default_light/chats_default_light.jpg)
-  ![Dialog Default Light](https://github.com/ItamiOWM/android-itami-chat/blob/master/art/light_blue/dialog_light_blue.jpg)
+  ![Dialog Default Light](https://github.com/ItamiOWM/android-itami-chat/blob/master/art/default_light/dialog_default_light.jpg)
