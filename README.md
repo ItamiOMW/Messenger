@@ -5,6 +5,8 @@ where email is used for authorization.\
 [Figma design](https://www.figma.com/file/Ls3lAJun9m7hCLMaPLQWrF/Itami-Chat?type=design&node-id=0%3A1&mode=design&t=vrFCl8PtCovoI9ZP-1)\
 [Ktor backend](https://github.com/ItamiOWM/MessengerBackend)
 
+![Messenger Thumbnail](https://github.com/ItamiOWM/android-itami-chat/blob/master/art/thumbnail.png)
+
 ## Features:
  - Send messages
  - Edit messages
